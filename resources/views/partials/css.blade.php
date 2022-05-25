@@ -1,0 +1,13 @@
+<link rel="stylesheet" href="{{ url('/assets') }}/css/preloader.css">
+<link rel="stylesheet" href="{{ url('/assets') }}/css/bootstrap.css">
+<link rel="stylesheet" href="{{ url('/assets') }}/css/meanmenu.css">
+<link rel="stylesheet" href="{{ url('/assets') }}/css/animate.css">
+<link rel="stylesheet" href="{{ url('/assets') }}/css/owl-carousel.css">
+<link rel="stylesheet" href="{{ url('/assets') }}/css/swiper-bundle.css">
+<link rel="stylesheet" href="{{ url('/assets') }}/css/backtotop.css">
+<link rel="stylesheet" href="{{ url('/assets') }}/css/magnific-popup.css">
+<link rel="stylesheet" href="{{ url('/assets') }}/css/nice-select.css">
+<link rel="stylesheet" href="{{ url('/assets') }}/css/font-awesome-pro.css">
+<link rel="stylesheet" href="{{ url('/assets') }}/flaticon/flaticon.css">
+<link rel="stylesheet" href="{{ url('/assets') }}/css/default.css">
+<link rel="stylesheet" href="{{ url('/assets') }}/css/style.css">

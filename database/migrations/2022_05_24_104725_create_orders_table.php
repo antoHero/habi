@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('delivery_type');
             $table->unsignedBigInteger('user_id');
             $table->string('payment_type');
-            $table->double(10, 2, 'order_amount');
+            $table->double('order_amount', 10, 2);
             $table->string('status')->default('PENDING');
             $table->string('tracking_id');
             $table->string('reference');

@@ -23,10 +23,11 @@
             <li>
                 <a href="javascript: void(0);"> <i data-feather="code" class="align-self-center menu-icon"></i><span>Categories</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
                 <ul class="nav-second-level" aria-expanded="false">
-                    <li class="nav-item"><a class="nav-link" href="{{ route('new.category.view') }}"><i class="ti-control-record"></i>Add</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('all.categories') }}"><i class="ti-control-record"></i>All Categories</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('all.subcategories') }}"><i class="ti-control-record"></i>All Subcategories</a></li>
                 </ul>
             </li>
+
 
             <li>
                 <a href="javascript: void(0);"><i data-feather="grid" class="align-self-center menu-icon"></i><span>Apps</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>

@@ -2,8 +2,8 @@
     <div class="col-lg-12 col-sm-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Categories</h4>
-                <a href="{{ route('new.category.view') }}" class="btn btn-primary text-white">Add New</a>
+                <h4 class="card-title">Subcategories</h4>
+                <a href="{{ route('new.subcategory.view') }}" class="btn btn-primary text-white">Add New</a>
             </div><!--end card-header-->
             <div class="card-body table-responsive">
                 <div class="">
@@ -12,6 +12,7 @@
                             <tr>
                                 <th>S/No</th>
                                 <th>Name</th>
+                                <th>Category</th>
                                 <th>URL</th>
                                 <th>Status</th>
                                 <th>Slug</th>
@@ -20,24 +21,24 @@
                         </thead>
 
 
-                        @if(count($categories) > 0)
+                        @if(count($subcategories) > 0)
                         <tbody>
-                            @foreach($categories as $key=>$category)
+                            @foreach($subcategories as $key=>$subcategory)
                             <a href="#">
                                 <tr>
                                     <th>{{ ++$key }}</th>
-                                    <th>{{ $category->name }}</th>
-                                    <th>{{ url('/').'/'.$category->slug }}</th>
-                                    <th>{{ $category->status }}</th>
-                                    <th>{{ $category->slug }}</th>
+                                    <th>{{ $subcategory->name }}</th>
+                                    <th>{{ $subcategory->category->name }}</th>
+                                    <th>{{ url('/').'/'.$subcategory->slug }}</th>
+                                    <th>{{ $subcategory->status }}</th>
+                                    <th>{{ $subcategory->slug }}</th>
                                     <td class="text-right">
                                         <div class="dropdown d-inline-block">
                                             <a class="dropdown-toggle arrow-none" id="dLabel11" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                                                 <i class="las la-ellipsis-v font-20 text-muted"></i>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dLabel11">
-                                                <a class="dropdown-item" href="{{ route('edit.category.view', $category->slug) }}">Edit</a>
-                                                <a class="dropdown-item" href="{{ route('category.change.status', $category->slug) }}">Change status</a>
+                                                <a class="dropdown-item" href="{{ route('edit.subcategory.view', $subcategory->slug) }}">Edit</a>
                                                 <a class="dropdown-item" data-toggle="modal" data-target="#exampleModalDefault">Delete</a>
                                             </div>
                                         </div>
@@ -47,7 +48,7 @@
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h6 class="modal-title m-0" id="exampleModalDefaultLabel">Delete category</h6>
+                                                    <h6 class="modal-title m-0" id="exampleModalDefaultLabel">Delete subcategory</h6>
                                                     <button type="button" class="close " data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true"><i class="la la-times"></i></span>
                                                     </button>
@@ -61,7 +62,7 @@
                                                             {{-- <img src="{{ url('/backend_assets') }}/images/widgets/btc.png" alt="" class="img-fluid"> --}}
                                                         </div><!--end col-->
                                                         <div class="col-lg-9">
-                                                            <h5>Delete {{ $category->name }}?</h5>
+                                                            <h5>Delete {{ $subcategory->name }}?</h5>
                                                             <span class="badge bg-soft-secondary">You cant undo this</span>
                                                         </div><!--end col-->
                                                     </div><!--end row-->                                                      

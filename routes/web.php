@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\SubcategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,18 @@ Route::prefix('dashboard')->group(function() {
             Route::put('/update/{slug}', 'updateCategory')->name('update.category');
             Route::put('/update-status/{slug}', 'updateCategory')->name('category.change.status');
             Route::delete('/delete/{slug}', 'deleteCategory')->name('delete.category');
+        });
+    });
+
+    Route::prefix('subcategories')->group(function() {
+        Route::controller(SubcategoryController::class)->group(function() {
+            Route::post('/create', 'createSubcsategory')->name('create.subcategory');
+            Route::get('/new', 'subcategoryView')->name('new.subcategory.view');
+            Route::get('/', 'subcategoryIndex')->name('all.subcategories');
+            Route::get('/{slug}', 'subcategory')->name('edit.subcategory.view');
+            Route::put('/update/{slug}', 'updateSubcategory')->name('update.subcategory');
+            Route::put('/update-status/{slug}', 'updateSubcategory')->name('subcategory.change.status');
+            Route::delete('/delete/{slug}', 'deleteSubcategory')->name('delete.subcategory');
         });
     });
     

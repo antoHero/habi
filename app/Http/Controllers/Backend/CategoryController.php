@@ -39,8 +39,7 @@ class CategoryController extends Controller
 
         $data = array(
             'name' => $validated['name'],
-            'description' => $validated['description'],
-            'status' => StatusEnum::INACTIVE()
+            'description' => $validated['description']
         );
 
         $newCategory = $this->categoryRepository->createCategory($data);

@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('title')
-    {{ $category->slug }}
+    {{ $subcategory->slug }}
 @endsection
 
 @section('section')
@@ -39,28 +39,36 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Edit Category</h4>
+                        <h4 class="card-title">Edit {{ $subcategory->name }}</h4>
                     </div><!--end card-header-->
                     <div class="card-body"> 
 
-                        <form action="{{ route('update.category', $category->slug) }}" method="POST">
+                        <form action="{{ route('update.subcategory', $subcategory->slug) }}" method="POST">
                             @csrf
                             @method('PUT')
+                            <label class="mb-2">Category</label>
+
+                            <select name="category_id" id="" class="form-control" maxlength="25">
+                                <option value="{{ $subcategory->category->id }}">{{ $subcategory->category->name }}</option>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+
                             <label class="mb-2">Name</label>
 
-                            <input type="text" placeholder="Name of category" value="{{ $category->name }}" class="form-control" maxlength="25" name="name" id="defaultconfig" />            
-                            
-                            <div class="mt-3">
-                                <label class="mb-2">Description</label>
-                                <textarea id="elm1" name="description">{{ $category->description }}</textarea>
-                            </div>
-                            
+                            <input type="text" placeholder="Name of subcategory" class="form-control" maxlength="25" name="name" value="{{ $subcategory->name }}" id="defaultconfig" />            
+                            <br>
                             <div class="form-group">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" name="status" id="InlineCheckbox" data-parsley-multiple="groups" data-parsley-mincheck="2" {{ $category->status === 'ACTIVE' ? 'checked' : '' }}>
-                                    <label class="custom-control-label" for="InlineCheckbox">{{ $category->status === 'INACTIVE' ? 'ACTIVATE' : 'DEACTIVATE' }}</label>
+                                    <input type="checkbox" class="custom-control-input" name="status" id="InlineCheckbox" data-parsley-multiple="groups" data-parsley-mincheck="2" {{ $subcategory->status === 'ACTIVE' ? 'checked' : '' }}>
+                                    <label class="custom-control-label" for="InlineCheckbox">{{ $subcategory->status === 'INACTIVE' ? 'ACTIVATE' : 'DEACTIVATE' }}</label>
                                 </div>
-                            </div>  
+                            </div> 
+                            {{-- <div class="mt-3">
+                                <label class="mb-2">Description</label>
+                                <textarea id="elm1" name="description">{{ $subcategory->description }}</textarea>
+                            </div>        --}}
                             
                             <div class="mt-3">
                                 <button class="btn btn-primary" type="submit">Update</button>
@@ -77,6 +85,6 @@
 
     </div><!-- container -->
 
-    @include('partials.backend_partials.credits')<!--end footer-->
+    @include('partials.backend_partials.credits')
 </div>
 @endsection

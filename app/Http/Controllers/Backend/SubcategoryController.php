@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateSubcategoryRequest;
 use App\Interfaces\SubcategoryRepositoryInterface;
 use App\Interfaces\CategoryRepositoryInterface;
 use App\Enums\StatusEnum;
+use App\Models\Category;
 
 class SubcategoryController extends Controller
 {
@@ -95,5 +96,12 @@ class SubcategoryController extends Controller
         }
 
 
+    }
+
+    public function subcategoryAjax($id)
+    {
+        $subcategories = Category::find($id)->sub_categories;
+
+        return response()->json($subcategories);
     }
 }

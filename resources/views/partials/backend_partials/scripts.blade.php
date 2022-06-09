@@ -35,39 +35,19 @@
  <script src="{{ url('backend_assets') }}/plugins/datatables/responsive.bootstrap4.min.js"></script>
  <script src="{{ url('backend_assets') }}/pages/jquery.datatable.init.js"></script>
 
+ <script src="{{ url('backend_assets') }}/plugins/dropify/js/dropify.min.js"></script>
+ <script src="{{ url('backend_assets') }}/pages/jquery.form-upload.init.js"></script>
+ <script src="{{ url('backend_assets') }}/plugins/select2/select2.min.js"></script>
+ <script src="{{ url('backend_assets') }}/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+<script src="{{ url('backend_assets') }}/plugins/timepicker/bootstrap-material-datetimepicker.js"></script>
+<script src="{{ url('backend_assets') }}/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
+<script src="{{ url('backend_assets') }}/plugins/bootstrap-touchspin/js/jquery.bootstrap-touchspin.min.js"></script>
+
+<script src="{{ url('backend_assets') }}/pages/jquery.forms-advanced.js"></script>
+
 <!-- App js -->
 <script src="{{ url('backend_assets') }}/js/app.js"></script>
 
-<script>
-    @if(Session::has('success'))
-        toastr.options = {
-            "closeButton" : true,
-            "progressBar" : true
-        }
-        toastr.success("{{ session('success') }}");
-    @endif
+<script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
 
-    @if(Session::has('error'))
-        toastr.options = {
-            "closeButton" : true,
-            "progressBar" : true
-        }
-        toastr.error("{{ session('error') }}");
-    @endif
-
-    @if(Session::has('info'))
-        toastr.options = {
-            "closeButton" : true,
-            "progressBar" : true
-        }
-        toastr.info("{{ session('info') }}");
-    @endif
-
-    @if(Session::has('warning'))
-        toastr.options = {
-            "closeButton" : true,
-            "progressBar" : true
-        }
-        toastr.warning("{{ session('warning') }}");
-    @endif
-</script>
+{!! Toastr::message() !!}

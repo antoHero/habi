@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateApparelRequest;
+use App\Http\Requests\CreateAttributeRequest;
 use App\Interfaces\ProductRepositoryInterface;
 use App\Interfaces\CategoryRepositoryInterface;
 use App\Enums\StatusEnum;
@@ -87,7 +88,7 @@ class ProductController extends Controller
 
         if($product = $this->productRepository->createApparel($data)) {
 
-            Toastr::success('Product successfully created successfully :)', 'Success!!');
+            Toastr::success('Product created successfully :)', 'Success!!');
 
             return redirect()->route('create.apparel.attributes', $product->slug);
         }
@@ -109,5 +110,45 @@ class ProductController extends Controller
                 'breadcrumb' => 'Dashboard'
             )
         ]);
+    }
+
+    public function createNewAttribute(CreateAttributeRequest $request, $slug)
+    {
+        $validated = $request->safe()->only([
+            'image',
+            'color'
+        ]);
+
+        $product = $this->productRepository->apparel($slug);
+
+        if($product)
+        {
+            $upload = cloudinary()->upload($validated['image']->getRealPath(), [
+                'folder' => 'habi/product_pictures/',
+                'public_id' => $product->id,
+                'resource_type' => 'image'
+            ])->getSecurePath();
+
+            $data = array(
+                'image' => $upload,
+                'color' => $validated['color'],
+                'product_id' => $product->id
+            );
+
+            if($attribute = $this->productRepository->addNewAttribute($data)) {
+
+                Toastr::success('Image added successfully to apparel :)', 'Success!!');
+
+                return redirect()->back();
+            }
+
+            Toastr::error('An error occurred when creating your product :)', 'Error!!');
+
+            return redirect()->back();
+        }
+
+        Toastr::error('The requested item was not found :)', 'Error!!');
+
+        return redirect()->back();
     }
 }

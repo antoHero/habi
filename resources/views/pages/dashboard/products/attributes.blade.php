@@ -43,7 +43,7 @@
                     </div><!--end card-header-->
                     <div class="card-body"> 
 
-                        <form action="{{ route('create.new.apparel') }}" method="POST">
+                        <form action="{{ route('create.new.attributes', $product->slug) }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="mt-3">
                                 <label class="mb-2">Image</label>
@@ -66,7 +66,7 @@
                                 <label class="mb-2">Color</label>
 
                                 <div id="b_color-default" class="input-group" title="Using input value">
-                                    <input type="text" class="form-control input-lg" value="#f5a416"/>
+                                    <input type="text" name="color" class="form-control input-lg" value="{{ old('color') }}"/>
                                     <span class="input-group-append">
                                         <span class="input-group-text colorpicker-input-addon"><i></i></span>
                                     </span>

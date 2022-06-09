@@ -53,14 +53,19 @@ Route::prefix('dashboard')->group(function() {
 
     Route::prefix('products')->group(function() {
         Route::controller(ProductController::class)->group(function() {
+
+            //routes for products
             Route::post('apparels/create', 'createNewApparel')->name('create.new.apparel');
-            Route::get('apparels/create-attributes/{slug}', 'createAttributesView')->name('create.apparel.attributes');
             Route::get('apparels/new', 'newApparelView')->name('new.apparel.view');
             Route::get('apparels', 'apparelsIndex')->name('all.apparels');
             Route::get('/apparel/{slug}', 'apparel')->name('edit.apparel.view');
             Route::put('/apparel/update/{slug}', 'updateApparel')->name('update.apparel');
             Route::put('/apparel/update-status/{slug}', 'changeApparelStatus')->name('change.apparel.status');
             Route::delete('/apparel/delete/{slug}', 'deleteApparel')->name('delete.apparel');
+
+            //routed for product attributes
+            Route::get('apparels/create-attributes/{slug}', 'createAttributesView')->name('create.apparel.attributes');
+            Route::post('apparels/create-new-attribute/{slug}', 'createNewAttribute')->name('create.new.attributes');
         });
     });
 

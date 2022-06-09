@@ -63,4 +63,9 @@ class Product extends Model
     protected $casts = [
         'size' => 'array',
     ];
+
+    public function product_attributes()
+    {
+        return $this->hasMany(ProductAttribute::class);
+    }
 }

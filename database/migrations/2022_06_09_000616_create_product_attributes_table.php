@@ -15,7 +15,11 @@ return new class extends Migration
     {
         Schema::create('product_attributes', function (Blueprint $table) {
             $table->id();
+            $table->string('image');
+            $table->string('color');
+            $table->unsignedBigInteger('product_id');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

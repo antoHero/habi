@@ -1,10 +1,12 @@
 <?php 
 
 namespace App\Repositories;
-use App\Models\Product;
+use App\Models\{Product, ProductAttribute};
 use App\Interfaces\ProductRepositoryInterface;
 
 class ProductRepository implements ProductRepositoryInterface {
+
+    //implemented methods for product
     public function createApparel(array $apparelInfo) {
         return Product::create($apparelInfo);
     }
@@ -27,5 +29,11 @@ class ProductRepository implements ProductRepositoryInterface {
     public function deleteApparel($apparelSlug)
     {
         return Product::destroy($apparelSlug);
+    }
+
+    //iplemented methods for product attributes
+    public function addNewAttribute(array $attribute)
+    {
+        return ProductAttribute::create($attribute);
     }
 }

@@ -9,7 +9,7 @@ class CategoryRepository implements CategoryRepositoryInterface {
         return Category::create($categoryInfo);
     }
     public function getAllCategories() {
-        return Category::orderBy('created_at', 'desc')->get();
+        return Category::orderBy('name', 'asc')->get();
     }
     public function category($slug) {
         return Category::whereSlug($slug)->first();

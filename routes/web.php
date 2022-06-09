@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\SubcategoryController;
+use App\Http\Controllers\Backend\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,12 +43,28 @@ Route::prefix('dashboard')->group(function() {
             Route::post('/create', 'createSubcsategory')->name('create.subcategory');
             Route::get('/new', 'subcategoryView')->name('new.subcategory.view');
             Route::get('/', 'subcategoryIndex')->name('all.subcategories');
+            Route::get('/ajax/{id}', 'subcategoryAjax');
             Route::get('/{slug}', 'subcategory')->name('edit.subcategory.view');
             Route::put('/update/{slug}', 'updateSubcategory')->name('update.subcategory');
             Route::put('/update-status/{slug}', 'updateSubcategory')->name('subcategory.change.status');
             Route::delete('/delete/{slug}', 'deleteSubcategory')->name('delete.subcategory');
         });
     });
+
+    Route::prefix('products')->group(function() {
+        Route::controller(ProductController::class)->group(function() {
+            Route::post('apparels/create', 'createNewApparel')->name('create.new.apparel');
+            Route::get('apparels/create-attributes/{slug}', 'createAttributesView')->name('create.apparel.attributes');
+            Route::get('apparels/new', 'newApparelView')->name('new.apparel.view');
+            Route::get('apparels', 'apparelsIndex')->name('all.apparels');
+            Route::get('/apparel/{slug}', 'apparel')->name('edit.apparel.view');
+            Route::put('/apparel/update/{slug}', 'updateApparel')->name('update.apparel');
+            Route::put('/apparel/update-status/{slug}', 'changeApparelStatus')->name('change.apparel.status');
+            Route::delete('/apparel/delete/{slug}', 'deleteApparel')->name('delete.apparel');
+        });
+    });
+
+    // Route::prefix
     
 });
 

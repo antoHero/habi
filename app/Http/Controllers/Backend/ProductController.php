@@ -4,13 +4,21 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Requests\CreateApparelRequest;
-use App\Http\Requests\CreateAttributeRequest;
-use App\Interfaces\ProductRepositoryInterface;
-use App\Interfaces\CategoryRepositoryInterface;
-use App\Enums\StatusEnum;
+use App\Http\Requests\{
+  CreateApparelRequest,
+  CreateAttributeRequest,
+  UpdateApparelRequest,
+  UpdateAttributeRequest,
+};
+use App\Interfaces\{
+  ProductRepositoryInterface,
+  StockRepositoryInterface,
+  CategoryRepositoryInterface
+};
+use App\Enums\{StatusEnum, ProductEnum, StockEnum};
 use Brian2694\Toastr\Facades\Toastr;
 use Cloudinary\Api\Upload\UploadApi;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -18,9 +26,14 @@ class ProductController extends Controller
 
     private CategoryRepositoryInterface $categoryRepository;
 
-    public function __construct(ProductRepositoryInterface $productRepository, CategoryRepositoryInterface $categoryRepository) {
+    private StockRepositoryInterface $stockRepository;
+
+    public function __construct(ProductRepositoryInterface $productRepository,
+                                CategoryRepositoryInterface $categoryRepository,
+                                StockRepositoryInterface $stockRepository) {
         $this->productRepository = $productRepository;
         $this->categoryRepository = $categoryRepository;
+        $this->stockRepository = $stockRepository;
     }
 
     public function apparelsIndex()
@@ -83,10 +96,17 @@ class ProductController extends Controller
             'detail' => $validated['detail'],
             'category_id' => $validated['category_id'],
             'sub_category_id' => $validated['sub_category_id'],
-            'is_product' => 1
+            'type' => ProductEnum::APPAREL()
         );
 
         if($product = $this->productRepository->createApparel($data)) {
+
+            $this->stockRepository->addToStock([
+              'product_id'=> $product->id,
+              'qty' => $product->qty,
+              'sku' => 'SKU' . Str::random(10),
+              'status' => StockEnum::AVAILABLE()
+            ]);
 
             Toastr::success('Product created successfully :)', 'Success!!');
 
@@ -150,5 +170,50 @@ class ProductController extends Controller
         Toastr::error('The requested item was not found :)', 'Error!!');
 
         return redirect()->back();
+    }
+
+    public function apparel($slug)
+    {
+      $product = $this->productRepository->apparel($slug);
+
+      return view('pages.dashboard.products.show', [
+          'product' => $product,
+          'attributes' => $this->productRepository->attributes($product->id),
+          'categories' => $this->categoryRepository->getAllCategories(),
+          'page' => array(
+              'title' => 'Product',
+              'breadcrumb' => 'Dashboard'
+          )
+      ]);
+    }
+
+    public function updateApparel(UpdateApparelRequest $request, $slug)
+    {
+      $product = $this->productRepository->apparel($slug);
+      // dd($request);
+      if($product->update([
+          'name' => $request->name ?? $product->name,
+          'amount' => $request->amount ?? $product->amount,
+          'image' =>  $product->image ?? cloudinary()->upload($request->image->getRealPath(), [
+              'folder' => 'habi/product_pictures/',
+              'resource_type' => 'image'
+          ])->getSecurePath(),
+          'qty' => $request->qty ?? $product->qty,
+          'size' => implode(',', $request->size) ?? $product->size,
+          'occasion' => $request->occasion ?? $product->ocassion,
+          'style' => $request->style ?? $product->style,
+          'material' => $request->material ?? $product->material,
+          'detail' => $request->detail ?? $product->detail,
+          'category_id' => $request->category_id ?? $product->category_id,
+          'sub_category_id' => $request->sub_category_id ?? $product->sub_category_id,
+        ])){
+          Toastr::success('Apparel has been successfully updated :)', 'Success!!');
+
+          return redirect()->route('all.apparels');
+      }
+
+      Toastr::error('An error ocurred, please try again', 'Error!!');
+
+      return redirect()->route('edit.apparel.view', $slug);
     }
 }

@@ -15,9 +15,6 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('is_product')->default(0)->nullable();
-            $table->integer('is_accessory')->default(0)->nullable();
-            $table->integer('is_fabric')->default(0)->nullable();
             $table->string('name')->nullable();
             $table->float('amount', 12,2)->nullable();
             $table->string('image')->nullable();
@@ -37,6 +34,7 @@ return new class extends Migration
             $table->longText('detail')->nullable();
             $table->string('status')->default('INACTIVE');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

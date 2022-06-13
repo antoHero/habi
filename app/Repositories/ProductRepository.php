@@ -1,8 +1,9 @@
-<?php 
+<?php
 
 namespace App\Repositories;
 use App\Models\{Product, ProductAttribute};
 use App\Interfaces\ProductRepositoryInterface;
+use App\Enums\{ProductEnum};
 
 class ProductRepository implements ProductRepositoryInterface {
 
@@ -13,7 +14,7 @@ class ProductRepository implements ProductRepositoryInterface {
 
     public function getAllApparels()
     {
-        return Product::orderBy('created_at', 'desc')->get();
+        return Product::ofType(ProductEnum::APPAREL()->value)->orderBy('created_at', 'desc')->get();
     }
 
     public function apparel($apparelSlug)
@@ -31,9 +32,14 @@ class ProductRepository implements ProductRepositoryInterface {
         return Product::destroy($apparelSlug);
     }
 
-    //iplemented methods for product attributes
+    //implemented methods for product attributes
     public function addNewAttribute(array $attribute)
     {
         return ProductAttribute::create($attribute);
+    }
+
+    public function attributes($productId)
+    {
+        return ProductAttribute::where('product_id', $productId)->get();
     }
 }

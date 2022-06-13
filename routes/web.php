@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\SubcategoryController;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\FabricController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,14 +64,24 @@ Route::prefix('dashboard')->group(function() {
             Route::put('/apparel/update-status/{slug}', 'changeApparelStatus')->name('change.apparel.status');
             Route::delete('/apparel/delete/{slug}', 'deleteApparel')->name('delete.apparel');
 
-            //routed for product attributes
+            //routes for product attributes
             Route::get('apparels/create-attributes/{slug}', 'createAttributesView')->name('create.apparel.attributes');
             Route::post('apparels/create-new-attribute/{slug}', 'createNewAttribute')->name('create.new.attributes');
+
+
         });
     });
 
-    // Route::prefix
-    
+    //routes for fabrics
+
+    Route::prefix('fabrics')->group(function() {
+      Route::controller(FabricController::class)->group(function() {
+        Route::get('/', 'fabricsIndex')->name('fabrics.index');
+        Route::get('/new', 'newFabricView')->name('new.fabric.view');
+        Route::post('/create', 'createNewFabric')->name('create.new.fabric');
+      });
+    });
+
 });
 
 

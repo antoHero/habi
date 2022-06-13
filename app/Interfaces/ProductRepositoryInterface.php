@@ -13,4 +13,5 @@ interface ProductRepositoryInterface {
 
     //methods for product attributes
     public function addNewAttribute(array $attribute);
+    public function attributes($productId);
 }

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateAttributeRequest extends FormRequest
+class CreateFabricRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,14 +24,10 @@ class CreateAttributeRequest extends FormRequest
     public function rules()
     {
         return [
-            'image' => [
-              'image',
-              'required'
-            ],
-            'color' => [
-              'string',
-              'required'
-            ]
+          'name' => ['string', 'required', 'min:3', 'max:100'],
+          'price' => ['numeric', 'required'],
+          'qty' => ['numeric', 'required'],
+          'image' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
         ];
     }
 }

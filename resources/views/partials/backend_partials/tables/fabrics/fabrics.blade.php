@@ -2,15 +2,14 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Apparels</h4>
-                <a href="{{ route('new.apparel.view') }}" class="btn btn-primary text-white">Add New</a>
+                <h4 class="card-title">Fabrics</h4>
+                <a href="{{ route('new.fabric.view') }}" class="btn btn-primary text-white">Add New</a>
             </div><!--end card-header-->
             <div class="card-body">
                 <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                     <thead>
                     <tr>
-                        <th>Product Name</th>
-                        <th>Category</th>
+                        <th>Name</th>
                         <th>Qty</th>
                         <th>Price</th>
                         <th>Status</th>
@@ -19,7 +18,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @if(count($products) > 0)
+                    @if($products)
                         @foreach($products as $key=>$product)
                         <a href="#">
                             <tr>
@@ -31,7 +30,6 @@
                                         <span class="text-muted font-13">Size: {{ $product->size }}</span>
                                     </p>
                                 </td>
-                                <td>{{ $product->category->name }}</td>
                                 <td>{{ $product->qty }}</td>
                                 <td>{{ '₦' . number_format($product->amount) }}</td>
                                 <td><span class="badge badge-soft-warning">{{ $product->status }}</span></td>
@@ -45,7 +43,7 @@
                                     </ul>
                                 </td>
                                 <td>
-                                    <a href="{{ route('edit.apparel.view', $product->slug) }}" class="mr-2"><i class="las la-pen text-info font-18"></i></a>
+                                    <a href="#" class="mr-2"><i class="las la-pen text-info font-18"></i></a>
                                     <a href="#"><i class="las la-trash-alt text-danger font-18"></i></a>
                                 </td>
                             </tr>

@@ -55,7 +55,20 @@ class Product extends Model
         return 'slug';
     }
 
-    public function category() 
+    /**
+     * Scope a query to only include users of a given type.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param  mixed  $type
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+
+    public function scopeOfType($query, $type)
+    {
+        return $query->where('type', $type);
+    }
+
+    public function category()
     {
         return $this->belongsTo(Category::class);
     }
@@ -67,5 +80,10 @@ class Product extends Model
     public function product_attributes()
     {
         return $this->hasMany(ProductAttribute::class);
+    }
+
+    public function fabric()
+    {
+      return $this->hasOne(Fabric::class);
     }
 }

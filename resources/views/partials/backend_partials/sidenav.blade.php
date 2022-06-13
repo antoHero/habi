@@ -33,11 +33,11 @@
                 <a href="javascript: void(0);"><i data-feather="grid" class="align-self-center menu-icon"></i><span>Products</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
                 <ul class="nav-second-level" aria-expanded="false">
                     <li class="nav-item"><a class="nav-link" href="{{ route('all.apparels') }}"><i class="ti-control-record"></i>Apparels</a></li>
-                    <li class="nav-item"><a class="nav-link" href="apps-contact-list.html"><i class="ti-control-record"></i>Fabrics </a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('fabrics.index') }}"><i class="ti-control-record"></i>Fabrics </a></li>
                     <li class="nav-item"><a class="nav-link" href="apps-calendar.html"><i class="ti-control-record"></i>Accessories</a></li>
-                    
+
                 </ul>
-            </li> 
+            </li>
 
             <li>
                 <a href="javascript: void(0);"><i data-feather="lock" class="align-self-center menu-icon"></i><span>Authentication</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
@@ -49,7 +49,7 @@
                     <li class="nav-item"><a class="nav-link" href="auth-404.html"><i class="ti-control-record"></i>Error 404</a></li>
                     <li class="nav-item"><a class="nav-link" href="auth-500.html"><i class="ti-control-record"></i>Error 500</a></li>
                 </ul>
-            </li> 
+            </li>
 
             <hr class="hr-dashed hr-menu">
             <li class="menu-label my-2">Components & Extra</li>
@@ -60,7 +60,7 @@
                     <li>
                         <a href="javascript: void(0);"><i class="ti-control-record"></i>UI Elements <span class="menu-arrow left-has-menu"><i class="mdi mdi-chevron-right"></i></span></a>
                         <ul class="nav-second-level" aria-expanded="false">
-                            <li><a href="ui-alerts.html">Alerts</a></li>                                    
+                            <li><a href="ui-alerts.html">Alerts</a></li>
                             <li><a href="ui-avatar.html">Avatar</a></li>
                             <li><a href="ui-buttons.html">Buttons</a></li>
                             <li><a href="ui-badges.html">Badges</a></li>
@@ -68,14 +68,14 @@
                             <li><a href="ui-carousels.html">Carousels</a></li>
                             <li><a href="ui-check-radio.html"><span>Check & Radio</span></a></li>
                             <li><a href="ui-dropdowns.html">Dropdowns</a></li>
-                            <li><a href="ui-grids.html">Grids</a></li> 
+                            <li><a href="ui-grids.html">Grids</a></li>
                             <li><a href="ui-images.html">Images</a></li>
-                            <li><a href="ui-list.html">List</a></li>                                   
+                            <li><a href="ui-list.html">List</a></li>
                             <li><a href="ui-modals.html">Modals</a></li>
                             <li><a href="ui-navs.html">Navs</a></li>
-                            <li><a href="ui-navbar.html">Navbar</a></li> 
-                            <li><a href="ui-paginations.html">Paginations</a></li>   
-                            <li><a href="ui-popover-tooltips.html">Popover & Tooltips</a></li>                                
+                            <li><a href="ui-navbar.html">Navbar</a></li>
+                            <li><a href="ui-paginations.html">Paginations</a></li>
+                            <li><a href="ui-popover-tooltips.html">Popover & Tooltips</a></li>
                             <li><a href="ui-progress.html">Progress</a></li>
                             <li><a href="ui-spinners.html">Spinners</a></li>
                             <li><a href="ui-tabs-accordions.html">Tabs & Accordions</a></li>
@@ -83,7 +83,7 @@
                             <li><a href="ui-typography.html">Typography</a></li>
                             <li><a href="ui-videos.html">Videos</a></li>
                         </ul>
-                    </li>  
+                    </li>
                     <li>
                         <a href="javascript: void(0);"><i class="ti-control-record"></i>Advanced UI <span class="menu-arrow left-has-menu"><i class="mdi mdi-chevron-right"></i></span></a>
                         <ul class="nav-second-level" aria-expanded="false">
@@ -92,15 +92,15 @@
                             <li><a href="advanced-highlight.html">Highlight</a></li>
                             <li><a href="advanced-idle-timer.html">Idle Timer</a></li>
                             <li><a href="advanced-kanban.html">Kanban</a></li>
-                            <li><a href="advanced-lightbox.html">Lightbox</a></li> 
+                            <li><a href="advanced-lightbox.html">Lightbox</a></li>
                             <li><a href="advanced-nestable.html">Nestable List</a></li>
                             <li><a href="advanced-rangeslider.html">Range Slider</a></li>
                             <li><a href="advanced-ratings.html">Ratings</a></li>
                             <li><a href="advanced-ribbons.html">Ribbons</a></li>
                             <li><a href="advanced-session.html">Session Timeout</a></li>
-                            <li><a href="advanced-sweetalerts.html">Sweet Alerts</a></li>                                    
+                            <li><a href="advanced-sweetalerts.html">Sweet Alerts</a></li>
                         </ul>
-                    </li>  
+                    </li>
                     <li>
                         <a href="javascript: void(0);"><i class="ti-control-record"></i>Forms <span class="menu-arrow left-has-menu"><i class="mdi mdi-chevron-right"></i></span></a>
                         <ul class="nav-second-level" aria-expanded="false">
@@ -112,9 +112,9 @@
                             <li><a href="forms-validation.html">Validation</a></li>
                             <li><a href="forms-wizard.html">Wizard</a></li>
                             <li><a href="forms-x-editable.html">X Editable</a></li>
-                            
+
                         </ul>
-                    </li>  
+                    </li>
                     <li>
                         <a href="javascript: void(0);"><i class="ti-control-record"></i>Charts <span class="menu-arrow left-has-menu"><i class="mdi mdi-chevron-right"></i></span></a>
                         <ul class="nav-second-level" aria-expanded="false">
@@ -123,7 +123,7 @@
                             <li><a href="charts-flot.html">Flot</a></li>
                             <li><a href="charts-morris.html">Morris</a></li>
                         </ul>
-                    </li>  
+                    </li>
                     <li>
                         <a href="javascript: void(0);"><i class="ti-control-record"></i>Tables <span class="menu-arrow left-has-menu"><i class="mdi mdi-chevron-right"></i></span></a>
                         <ul class="nav-second-level" aria-expanded="false">
@@ -131,13 +131,13 @@
                             <li><a href="tables-datatable.html">Datatables</a></li>
                             <li><a href="tables-editable.html">Editable</a></li>
                             <li><a href="tables-responsive.html">Responsive</a></li>
-                            
+
                         </ul>
-                    </li>  
+                    </li>
                     <li>
                         <a href="javascript: void(0);"><i class="ti-control-record"></i>Icons <span class="menu-arrow left-has-menu"><i class="mdi mdi-chevron-right"></i></span></a>
                         <ul class="nav-second-level" aria-expanded="false">
-                            
+
                             <li><a href="icons-dripicons.html">Dripicons</a></li>
                             <li><a href="icons-feather.html">Feather</a></li>
                             <li><a href="icons-fontawesome.html">Font awesome</a></li>
@@ -145,24 +145,24 @@
                             <li><a href="icons-themify.html">Themify</a></li>
                             <li><a href="icons-typicons.html">Typicons</a></li>
                         </ul>
-                    </li>  
+                    </li>
                     <li>
                         <a href="javascript: void(0);"><i class="ti-control-record"></i>Maps <span class="menu-arrow left-has-menu"><i class="mdi mdi-chevron-right"></i></span></a>
                         <ul class="nav-second-level" aria-expanded="false">
                             <li><a href="maps-google.html">Google Maps</a></li>
                             <li><a href="maps-leaflet.html">Leaflet Maps</a></li>
-                            <li><a href="maps-vector.html">Vector Maps</a></li>  
+                            <li><a href="maps-vector.html">Vector Maps</a></li>
                         </ul>
-                    </li>  
+                    </li>
                     <li>
                         <a href="javascript: void(0);"><i class="ti-control-record"></i>Email Template <span class="menu-arrow left-has-menu"><i class="mdi mdi-chevron-right"></i></span></a>
                         <ul class="nav-second-level" aria-expanded="false">
                             <li><a href="email-templates-alert.html">Alert Email</a></li>
-                            <li><a href="email-templates-basic.html">Basic Action Email</a></li>                                    
+                            <li><a href="email-templates-basic.html">Basic Action Email</a></li>
                             <li><a href="email-templates-billing.html">Billing Email</a></li>
                         </ul>
-                    </li>   
-                </ul>                        
+                    </li>
+                </ul>
             </li>
 
             <li>
@@ -175,12 +175,12 @@
                     <li class="nav-item"><a class="nav-link" href="pages-blogs.html"><i class="ti-control-record"></i>Blogs</a></li>
                     <li class="nav-item"><a class="nav-link" href="pages-faqs.html"><i class="ti-control-record"></i>FAQs</a></li>
                     <li class="nav-item"><a class="nav-link" href="pages-pricing.html"><i class="ti-control-record"></i>Pricing</a></li>
-                    <li class="nav-item"><a class="nav-link" href="pages-profile.html"><i class="ti-control-record"></i>Profile</a></li>   
-                    <li class="nav-item"><a class="nav-link" href="pages-starter.html"><i class="ti-control-record"></i>Starter Page</a></li>                         
+                    <li class="nav-item"><a class="nav-link" href="pages-profile.html"><i class="ti-control-record"></i>Profile</a></li>
+                    <li class="nav-item"><a class="nav-link" href="pages-starter.html"><i class="ti-control-record"></i>Starter Page</a></li>
                     <li class="nav-item"><a class="nav-link" href="pages-timeline.html"><i class="ti-control-record"></i>Timeline</a></li>
                     <li class="nav-item"><a class="nav-link" href="pages-treeview.html"><i class="ti-control-record"></i>Treeview</a></li>
                 </ul>
-            </li>           
+            </li>
         </ul>
     </div>
 </div>

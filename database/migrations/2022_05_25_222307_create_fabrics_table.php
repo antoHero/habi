@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->integer('qty')->nullable();
-            $table->double('price', 10,8)->nullable();
+            $table->float('price', 12,2)->nullable();
             $table->string('image')->nullable();
             $table->string('slug')->nullable();
             $table->string('status')->default('INACTIVE');

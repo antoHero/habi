@@ -24,17 +24,55 @@ class CreateApparelRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['string', 'required', 'min:3', 'max:100'],
-            'amount' => ['numeric', 'required'],
-            'image' => ['image', 'required'],
-            'qty' => ['numeric', 'required'],
-            'size' => ['required', 'array'],
-            'occasion' => ['string', 'required', 'max:25'],
-            'style' => ['string', 'required', 'max:25'],
-            'material' => ['string', 'required', 'max:25'],
-            'detail' => ['string', 'required'],
-            'category_id' => ['numeric', 'required'],
-            'sub_category_id' => ['numeric', 'required']
+            'name' => [
+              'string',
+              'required',
+              'min:3',
+              'max:100'
+            ],
+            'amount' => [
+              'numeric',
+              'required'
+            ],
+            'image' => [
+              'image',
+              'required'
+            ],
+            'qty' => [
+              'numeric',
+              'required'
+            ],
+            'size' => [
+              'required',
+              'array'
+            ],
+            'occasion' => [
+              'string',
+              'required',
+              'max:25'
+            ],
+            'style' => [
+              'string',
+              'required',
+              'max:25'
+            ],
+            'material' => [
+              'string',
+              'required',
+              'max:25'
+            ],
+            'detail' => [
+              'string',
+              'required'
+            ],
+            'category_id' => [
+              'numeric',
+              'required'
+            ],
+            'sub_category_id' => [
+              'numeric',
+              'required'
+            ]
         ];
     }
 }

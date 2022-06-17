@@ -196,7 +196,7 @@
                                         </td>
                                         <td><li class="list-inline-item align-middle"><i class="fas fa-circle" style="color: {{$attribute->color}};"></i></li></td>
                                         <td>
-                                            <a href="#" class="mr-2"><i class="las la-pen text-info font-18"></i></a>
+                                            <a href="{{ route('get.product.attribute', $attribute->id) }}" class="mr-2"><i class="las la-pen text-info font-18"></i></a>
                                             <a href="#"><i class="las la-trash-alt text-danger font-18"></i></a>
                                         </td>
                                     </tr>

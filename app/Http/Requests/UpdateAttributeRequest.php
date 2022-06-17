@@ -26,11 +26,11 @@ class UpdateAttributeRequest extends FormRequest
         return [
           'image' => [
             'image',
-            'required'
+            'nullable'
           ],
           'color' => [
             'string',
-            'required'
+            'nullable'
           ]
         ];
     }

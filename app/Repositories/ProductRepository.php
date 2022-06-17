@@ -42,4 +42,14 @@ class ProductRepository implements ProductRepositoryInterface {
     {
         return ProductAttribute::where('product_id', $productId)->get();
     }
+
+    public function attribute($id)
+    {
+      return ProductAttribute::findOrFail($id);
+    }
+
+    public function updateAttribute($id, array $updateInfo)
+    {
+      return ProductAttribute::find($id)->update($updateInfo);
+    }
 }

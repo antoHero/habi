@@ -113,7 +113,7 @@ class ProductController extends Controller
 
             Toastr::success('Product created successfully :)', 'Success!!');
 
-            return redirect()->route('create.apparel.attributes', $product->slug);
+            return redirect()->route('create.apparel.attributes', ['slug' => $product->slug, 'type' => $product->type]);
         }
 
         Toastr::error('An error occurred when creating your product :)', 'Error!!');

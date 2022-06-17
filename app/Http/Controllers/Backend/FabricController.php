@@ -9,7 +9,7 @@ use App\Interfaces\{FabricRepositoryInterface, StockRepositoryInterface, Product
 use App\Enums\{StatusEnum, StockEnum, ProductEnum};
 use App\Models\Stock;
 use Brian2694\Toastr\Facades\Toastr;
-use Cloudinary\Api\Upload\UploadApi;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Support\Str;
 
 class FabricController extends Controller
@@ -58,10 +58,14 @@ class FabricController extends Controller
         'image'
       ]);
 
-      $upload = cloudinary()->upload($validated['image']->getRealPath(), [
-          'folder' => 'habi/product_pictures/',
-          'resource_type' => 'image'
-      ])->getSecurePath();
+      // $upload = cloudinary()->upload($validated['image']->getRealPath(), [
+      //     'folder' => 'habi/product_pictures/',
+      //     'resource_type' => 'image'
+      // ])->getSecurePath();
+
+      // $upload = (new UploadApi())->upload($validated['image']);
+
+      $upload = Cloudinary::upload($validated['image']->getRealPath())->getSecurePath();
 
       $data = array(
           'name' => $validated['name'],

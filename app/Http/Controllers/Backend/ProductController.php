@@ -17,7 +17,7 @@ use App\Interfaces\{
 };
 use App\Enums\{StatusEnum, ProductEnum, StockEnum};
 use Brian2694\Toastr\Facades\Toastr;
-use Cloudinary\Api\Upload\UploadApi;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Support\Str;
 
 class ProductController extends Controller
@@ -79,10 +79,12 @@ class ProductController extends Controller
         //     'resource_type' => 'image'
         // ]);
 
-        $upload = cloudinary()->upload($validated['image']->getRealPath(), [
-            'folder' => 'habi/product_pictures/',
-            'resource_type' => 'image'
-        ])->getSecurePath();
+        // $upload = cloudinary()->upload($validated['image']->getRealPath(), [
+        //     'folder' => 'habi/product_pictures/',
+        //     'resource_type' => 'image'
+        // ])->getSecurePath();
+
+        $upload = Cloudinary::upload($validated['image']->getRealPath())->getSecurePath();
 
         $data = array(
             'name' => $validated['name'],
@@ -143,11 +145,7 @@ class ProductController extends Controller
 
         if($product)
         {
-            $upload = cloudinary()->upload($validated['image']->getRealPath(), [
-                'folder' => 'habi/product_pictures/',
-                'public_id' => $product->id,
-                'resource_type' => 'image'
-            ])->getSecurePath();
+            $upload = Cloudinary::upload($validated['image']->getRealPath())->getSecurePath();
 
             $data = array(
                 'image' => $upload,
@@ -190,14 +188,11 @@ class ProductController extends Controller
     public function updateApparel(UpdateApparelRequest $request, $slug)
     {
       $product = $this->productRepository->apparel($slug);
-      // dd($request);
+
       if($product->update([
           'name' => $request->name ?? $product->name,
           'amount' => $request->amount ?? $product->amount,
-          'image' =>  $product->image ?? cloudinary()->upload($request->image->getRealPath(), [
-              'folder' => 'habi/product_pictures/',
-              'resource_type' => 'image'
-          ])->getSecurePath(),
+          'image' =>  $product->image ?? Cloudinary::upload($validated['image']->getRealPath())->getSecurePath(),
           'qty' => $request->qty ?? $product->qty,
           'size' => implode(',', $request->size) ?? $product->size,
           'occasion' => $request->occasion ?? $product->ocassion,
@@ -215,5 +210,48 @@ class ProductController extends Controller
       Toastr::error('An error ocurred, please try again', 'Error!!');
 
       return redirect()->route('edit.apparel.view', $slug);
+    }
+
+    public function productAttribute($id)
+    {
+      return view('pages.dashboard.products.attribute', [
+        'attribute' => $this->productRepository->attribute($id),
+        'page' => array(
+            'title' => 'Product',
+            'breadcrumb' => 'Dashboard'
+        )
+      ]);
+    }
+
+    public function updateAttribute(UpdateAttributeRequest $request, $id)
+    {
+      // dd($request);
+
+      $product = $this->productRepository->attribute($id);
+
+      // if($request->hasFile('image')) {
+      //   $upload = cloudinary()->upload($request->image->getRealPath(), [
+      //       'folder' => 'habi/product_pictures/',
+      //       'resource_type' => 'image'
+      //   ])->getSecurePath()
+      //
+      //   $this->productRepository->updateAttribute($id, [
+      //     'image' =>
+      //   ])
+      // }
+
+      if($this->productRepository->updateAttribute($id, [
+        'color' => $request->color ?? $product->color,
+        'image' => $request->hasFile('image') ? Cloudinary::upload($request->image->getRealPath())->getSecurePath() : $product->image
+      ]))
+      {
+        Toastr::success('This attribute has been successfully updated :)', 'Success!!');
+
+        return redirect()->route('all.apparels');
+      }
+
+      Toastr::error('An error ocurred, please try again', 'Error!!');
+
+      return redirect()->route('get.product.attribute', $id);
     }
 }

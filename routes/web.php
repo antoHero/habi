@@ -67,7 +67,8 @@ Route::prefix('dashboard')->group(function() {
             //routes for product attributes
             Route::get('apparels/create-attributes/{slug}', 'createAttributesView')->name('create.apparel.attributes');
             Route::post('apparels/create-new-attribute/{slug}', 'createNewAttribute')->name('create.new.attributes');
-
+            Route::get('apparels/attribute/{id}', 'productAttribute')->name('get.product.attribute');
+            Route::put('apparels/update-attribute/{id}', 'updateAttribute')->name('update.attribute');
 
         });
     });

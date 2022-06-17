@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Requests\CreateFabricRequest;
+use App\Http\Requests\{CreateFabricRequest, UpdateFabricRequest};
 use App\Interfaces\{FabricRepositoryInterface, StockRepositoryInterface, ProductRepositoryInterface};
 use App\Enums\{StatusEnum, StockEnum, ProductEnum};
 use App\Models\Stock;
@@ -96,13 +96,44 @@ class FabricController extends Controller
 
         Toastr::success('Fabric created successfully :)', 'Success!!');
 
-        return redirect()->route('create.apparel.attributes', $product->slug);
+        return redirect()->route('create.apparel.attributes', ['slug' => $product->slug, 'type' => $product->type]);
 
       }
 
       Toastr::error('An error occurred :)', 'Error!!');
 
       return redirect()->back();
+
+    }
+
+    public function getFabric($slug)
+    {
+      $fabric = $this->fabricRepository->fabric($slug);
+
+      return view('pages.dashboard.fabrics.show', [
+        'fabric' => $fabric,
+        'attributes' => $this->productRepository->attributes($fabric->id),
+        'page' => array(
+            'title' => 'Fabric',
+            'breadcrumb' => 'Dashboard'
+        )
+      ]);
+    }
+
+    public function updateFabric(UpdateFabricRequest $request, $slug)
+    {
+      $fabric = $this->fabricRepository->fabric($slug);
+
+      $this->fabricRepository->updateFabric($slug, [
+        'name' => $fabric->name ?? $request->name,
+        'qty' => $fabric->qty ?? $request->qty,
+        'price' => $fabric->price ?? $request->price,
+        'image' => $fabric->image ?? Cloudinary::upload($validated['image']->getRealPath())->getSecurePath()
+      ]);
+
+      Toastr::success('Fabric updated successfully :)', 'Success!!');
+
+      return redirect()->route('fabrics.index');
 
     }
 }

@@ -65,7 +65,7 @@ Route::prefix('dashboard')->group(function() {
             Route::delete('/apparel/delete/{slug}', 'deleteApparel')->name('delete.apparel');
 
             //routes for product attributes
-            Route::get('apparels/create-attributes/{slug}', 'createAttributesView')->name('create.apparel.attributes');
+            Route::get('apparels/create-attributes/{slug}/{type}', 'createAttributesView')->name('create.apparel.attributes');
             Route::post('apparels/create-new-attribute/{slug}', 'createNewAttribute')->name('create.new.attributes');
             Route::get('apparels/attribute/{id}', 'productAttribute')->name('get.product.attribute');
             Route::put('apparels/update-attribute/{id}', 'updateAttribute')->name('update.attribute');
@@ -80,6 +80,8 @@ Route::prefix('dashboard')->group(function() {
         Route::get('/', 'fabricsIndex')->name('fabrics.index');
         Route::get('/new', 'newFabricView')->name('new.fabric.view');
         Route::post('/create', 'createNewFabric')->name('create.new.fabric');
+        Route::get('/{slug}', 'getFabric')->name('get.fabric');
+        Route::put('/{slug}', 'updateFabric')->name('update.fabric');
       });
     });
 

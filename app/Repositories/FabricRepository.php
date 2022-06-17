@@ -16,4 +16,15 @@ class FabricRepository implements FabricRepositoryInterface {
   {
     return Fabric::create($stockInfo);
   }
+
+  public function fabric($slug)
+  {
+    return Product::ofType('FABRIC')->where('slug', $slug)->first();
+    // return Fabric::where('slug',$slug)->first();
+  }
+
+  public function updateFabric($slug, array $updateInfo)
+  {
+    return $this->fabric($slug)->update($updateInfo);
+  }
 }

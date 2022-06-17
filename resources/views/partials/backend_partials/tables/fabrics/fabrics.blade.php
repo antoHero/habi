@@ -43,7 +43,7 @@
                                     </ul>
                                 </td>
                                 <td>
-                                    <a href="#" class="mr-2"><i class="las la-pen text-info font-18"></i></a>
+                                    <a href="{{ route('get.fabric', $product->slug) }}" class="mr-2"><i class="las la-pen text-info font-18"></i></a>
                                     <a href="#"><i class="las la-trash-alt text-danger font-18"></i></a>
                                 </td>
                             </tr>

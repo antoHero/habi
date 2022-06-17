@@ -19,6 +19,7 @@ use App\Enums\{StatusEnum, ProductEnum, StockEnum};
 use Brian2694\Toastr\Facades\Toastr;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Support\Str;
+use App\Models\Product;
 
 class ProductController extends Controller
 {
@@ -121,9 +122,10 @@ class ProductController extends Controller
 
     }
 
-    public function createAttributesView($slug)
+    public function createAttributesView($slug, $type)
     {
-        $product = $this->productRepository->apparel($slug);
+
+        $product = Product::ofType($type)->where('slug', $slug)->first();
 
         return view('pages.dashboard.products.attributes', [
             'product' => $product,

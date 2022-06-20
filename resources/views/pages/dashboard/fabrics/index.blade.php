@@ -41,4 +41,5 @@
 
     @include('partials.backend_partials.credits')
 </div>
+
 @endsection

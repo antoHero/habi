@@ -9,10 +9,10 @@
 <script src="{{ url('backend_assets') }}/js/moment.js"></script>
 <script src="{{ url('backend_assets') }}/plugins/daterangepicker/daterangepicker.js"></script>
 
-<script src="{{ url('backend_assets') }}/plugins/apex-charts/apexcharts.min.js"></script>
+<!-- <script src="{{ url('backend_assets') }}/plugins/apex-charts/apexcharts.min.js"></script> -->
 <script src="{{ url('backend_assets') }}/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
 <script src="{{ url('backend_assets') }}/plugins/jvectormap/jquery-jvectormap-us-aea-en.js"></script>
-<script src="{{ url('backend_assets') }}/pages/jquery.sales_dashboard.init.js"></script>
+<!-- <script src="{{ url('backend_assets') }}/pages/jquery.sales_dashboard.init.js"></script> -->
 
  <!--Wysiwig js-->
  <script src="{{ url('backend_assets') }}/plugins/tinymce/tinymce.min.js"></script>
@@ -49,5 +49,7 @@
 <script src="{{ url('backend_assets') }}/js/app.js"></script>
 
 <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+
+
 
 {!! Toastr::message() !!}

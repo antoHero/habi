@@ -58,7 +58,7 @@
         <!-- Left Sidenav -->
         @include('partials.backend_partials.sidenav')
         <!-- end left-sidenav-->
-        
+
 
         <div class="page-wrapper">
             <!-- Top Bar Start -->
@@ -71,7 +71,7 @@
         </div>
         <!-- end page-wrapper -->
 
-        
+
 
 
         @include('partials.backend_partials.scripts')

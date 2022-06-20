@@ -34,8 +34,8 @@
                             <a href="#" class="btn btn-sm btn-outline-primary">
                                 <i data-feather="download" class="align-self-center icon-xs"></i>
                             </a>
-                        </div><!--end col-->  
-                    </div><!--end row-->                                                              
+                        </div><!--end col-->
+                    </div><!--end row-->
                 </div><!--end page-title-box-->
             </div><!--end col-->
         </div><!--end row-->
@@ -50,21 +50,21 @@
                 </ul>
             </div>
         @endif
-        
+
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title">Add New apparel</h4>
                     </div><!--end card-header-->
-                    <div class="card-body"> 
+                    <div class="card-body">
 
                         <form action="{{ route('create.new.apparel') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <label class="mb-2">Title</label>
 
-                            <input type="text" placeholder="Title of product" class="form-control" name="name" id="defaultconfig" value="{{ old('name') }}" />            
-                            
+                            <input type="text" placeholder="Title of product" class="form-control" name="name" id="defaultconfig" value="{{ old('name') }}" />
+
                             <div class="form-group row">
                                 <div class="col-md-4 my-2 control-label">
                                     <div class="my-2">
@@ -84,7 +84,7 @@
                                         <div class="">
                                             <label class="mb-2">Category</label>
                                             <select name="sub_category_id" id="" class="form-control getting_subcat" value="{{ old('sub_category_id') }}">
-                                                <option value="">--select--</option>
+                                                
                                             </select>
                                         </div>
                                     </div>
@@ -105,7 +105,7 @@
                                         <div class="">
                                             <label class="mb-2">Amount</label>
                                             <input type="number" placeholder="Amount" class="form-control" maxlength="25" name="amount" id="defaultconfig" value="{{ old('amount') }}" />
-                                            
+
                                         </div>
                                     </div>
                                 </div>
@@ -125,7 +125,7 @@
                                         <div class="">
                                             <label class="mb-2">Ocassion</label>
                                             <input type="text" placeholder="Ocassion" class="form-control" maxlength="25" name="occasion" id="defaultconfig" value="{{ old('ocassion') }}" />
-                                            
+
                                         </div>
                                     </div>
                                 </div>
@@ -166,18 +166,18 @@
                             <div class="mt-3">
                                 <label class="mb-2">Description</label>
                                 <textarea id="elm1" name="detail" value="{{ old('description') }}"></textarea>
-                            </div>       
-                            
+                            </div>
+
                             <div class="mt-3">
                                 <button class="btn btn-primary" type="submit">Submit</button>
                             </div>
                         </form>
-                        
-                        
 
-                                                     
+
+
+
                     </div> <!-- end card-body -->
-                </div> <!-- end card -->                                       
+                </div> <!-- end card -->
             </div> <!-- end col -->
         </div> <!-- end row -->
 
@@ -192,7 +192,7 @@
         {
             var base_url = '{{ url('/') }}';
             let id = $('#apparelCat').val();
-            
+
 
             console.log('logging from jquery', id);
 
@@ -202,11 +202,11 @@
                     url: base_url + '/dashboard/subcategories/ajax/' + id,
                     method: 'GET',
                     success: function(result) {
-                        
+
                         $('.hideSubCat').removeClass('d-none')
                         $('.getting_subcat').empty();
                         $.each(result, function(key, value) {
-                          
+
                             $('.getting_subcat').append('<option class="form-control" value="">--select--</option> <option class="form-control" value="'+value['id']+'">'+value['name']+'</option>');
                         })
                     }

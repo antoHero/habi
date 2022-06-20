@@ -256,4 +256,9 @@ class ProductController extends Controller
 
       return redirect()->route('get.product.attribute', $id);
     }
+
+    public function getProduct($slug, $type)
+    {
+      return Product::ofType($type)->where('slug',$slug)->first();
+    }
 }

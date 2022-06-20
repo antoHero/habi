@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\SubcategoryController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\FabricController;
+use App\Http\Controllers\Frontend\FrontendController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,9 +18,8 @@ use App\Http\Controllers\Backend\FabricController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
+Route::controller(FrontendController::class)->group(function() {
+  Route::get('/', 'home')->name('get.home');
 });
 
 Route::get('/dashboard', function () {
@@ -69,9 +69,10 @@ Route::prefix('dashboard')->group(function() {
             Route::post('apparels/create-new-attribute/{slug}', 'createNewAttribute')->name('create.new.attributes');
             Route::get('apparels/attribute/{id}', 'productAttribute')->name('get.product.attribute');
             Route::put('apparels/update-attribute/{id}', 'updateAttribute')->name('update.attribute');
-
+            Route::get('product/{slug}/{type}', 'getProduct');
         });
     });
+
 
     //routes for fabrics
 

@@ -3,19 +3,7 @@
         <div class="header-top pl-60 pr-60 d-none d-md-block">
             <div class="row align-items-center">
                 <div class="col-xxl-4 col-xl-4 col-lg-6 col-md-4">
-                    <div class="currency has-n-select d-inline-block">
-                        <select name="currency" id="currency">
-                            <option value="USD">USD</option>
-                            <option value="BDT">BDT</option>
-                            <option value="INDIA">RUPI</option>
-                        </select>
-                    </div>
-                    <div class="language has-n-select d-inline-block">
-                        <select name="language" id="language">
-                            <option value="english">English</option>
-                            <option value="bangladesh">bangladesh</option>
-                        </select>
-                    </div>
+
                 </div>
                 <div class="col-xxl-4 col-xl-4 d-none d-xl-block">
                     <p class="white-text center-text">Our stores are open — welcome back. COVID-19 Updates.</p>
@@ -48,7 +36,7 @@
                     <div class="main-menu p-rel d-flex align-items-center justify-content-center">
                         <nav id="mobile-menu">
                             <ul>
-                                <li><a href="index.html">Women</a></li>
+                                <li><a href="{{ route('get.women.area') }}">Women</a></li>
                                 <li class="static">
                                     <a href="about-us.html">Men</a>
                                 </li>

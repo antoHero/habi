@@ -16,7 +16,8 @@ class SubCategory extends Model
         'name',
         'category_id',
         'slug',
-        'status'
+        'status',
+        'bg'
     ];
 
      /**

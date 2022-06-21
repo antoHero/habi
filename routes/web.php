@@ -20,6 +20,7 @@ use App\Http\Controllers\Frontend\FrontendController;
 */
 Route::controller(FrontendController::class)->group(function() {
   Route::get('/', 'home')->name('get.home');
+  Route::get('/women', 'womenArea')->name('get.women.area');
 });
 
 Route::get('/dashboard', function () {

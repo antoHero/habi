@@ -14,6 +14,8 @@ use App\Interfaces\FabricRepositoryInterface;
 use App\Repositories\FabricRepository;
 use App\Interfaces\StockRepositoryInterface;
 use App\Repositories\StockRepository;
+use App\Interfaces\FrontendRepositoryInterface;
+use App\Repositories\FrontendRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -29,6 +31,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(ProductRepositoryInterface::class, ProductRepository::class);
         $this->app->bind(FabricRepositoryInterface::class, FabricRepository::class);
         $this->app->bind(StockRepositoryInterface::class, StockRepository::class);
+        $this->app->bind(FrontendRepositoryInterface::class, FrontendRepository::class);
     }
 
     /**

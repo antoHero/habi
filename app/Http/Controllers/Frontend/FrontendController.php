@@ -21,7 +21,19 @@ class FrontendController extends Controller
 
     public function womenArea()
     {
-      $categories = $this->frontendRepository->womenArea()->sub_categories;
-      
+      $category = $this->frontendRepository->womenArea();
+
+      return view('pages.frontend.women.index', [
+        'category' => $category
+      ]);
+    }
+
+    public function menArea()
+    {
+      $category = $this->frontendRepository->menArea();
+
+      return view('pages.frontend.men.index', [
+        'category' => $category
+      ]);
     }
 }

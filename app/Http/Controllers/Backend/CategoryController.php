@@ -70,14 +70,13 @@ class CategoryController extends Controller
       // if($request->hasFile('image')) {
       //   dd('yes');
       // }
-      //   dd($request->all());
         $category = $this->categoryRepository->category($slug);
 
         $data = array(
             'name' => $request->name,
             'description' => $request->description,
             'status' => $request->status ? 'ACTIVE' : 'INACTIVE',
-            'bg' => $category->bg ?? Cloudinary::upload($request->image->getRealPath())->getSecurePath()
+            'bg' => $request->image ? Cloudinary::upload($request->image->getRealPath())->getSecurePath() : $category->bg
         );
 
         $updated = $this->categoryRepository->updateCategory($slug, $data);

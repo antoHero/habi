@@ -25,7 +25,8 @@ class CreateCategoryRequest extends FormRequest
     {
         return [
             'name' => ['string', 'required', 'min:3', 'max:25'],
-            'description' => ['string', 'required']
+            'description' => ['string', 'required'],
+            'image' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
         ];
     }
 }

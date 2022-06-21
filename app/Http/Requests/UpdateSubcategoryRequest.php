@@ -26,7 +26,8 @@ class UpdateSubcategoryRequest extends FormRequest
         return [
             'name' => ['string', 'nullable', 'min:3', 'max:25'],
             'category_id' => ['nullable'],
-            'status' => ['nullable']
+            'status' => ['nullable'],
+            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:3048'],
         ];
     }
 }

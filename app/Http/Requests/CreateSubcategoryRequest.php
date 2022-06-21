@@ -25,7 +25,8 @@ class CreateSubcategoryRequest extends FormRequest
     {
         return [
             'name' => ['string', 'required', 'min:3', 'max:25'],
-            'category_id' => ['required']
+            'category_id' => ['required'],
+            'image' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
         ];
     }
 }

@@ -15,7 +15,8 @@ class Category extends Model
     protected $fillable = [
         'name',
         'description',
-        'slug'
+        'slug',
+        'bg'
     ];
 
     /**
@@ -41,5 +42,10 @@ class Category extends Model
     public function sub_categories()
     {
         return $this->hasMany(SubCategory::class);
+    }
+
+    public function scopeOfSlug($query, $slug)
+    {
+        return $query->where('slug', $slug);
     }
 }

@@ -26,7 +26,8 @@ class UpdateCategoryRequest extends FormRequest
         return [
             'name' => ['string', 'nullable', 'min:3', 'max:25'],
             'description' => ['string', 'nullable'],
-            'status' => ['string', 'nullable']
+            'status' => ['string', 'nullable'],
+            'image' => 'nullable|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
         ];
     }
 }

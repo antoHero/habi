@@ -7,6 +7,7 @@ use App\Http\Requests\CreateCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Interfaces\CategoryRepositoryInterface;
 use App\Enums\StatusEnum;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class CategoryController extends Controller
 {
@@ -28,18 +29,12 @@ class CategoryController extends Controller
 
     public function createCategory(CreateCategoryRequest $request) {
 
-        //get validated fields from form
-        $validated = $request->validated();
-
-        //return only  safe fields from form
-        $validated = $request->safe()->only([
-            'name',
-            'description'
-        ]);
+        $upload = Cloudinary::upload($request->image->getRealPath())->getSecurePath();
 
         $data = array(
-            'name' => $validated['name'],
-            'description' => $validated['description']
+            'name' => $request->name,
+            'description' => $request->description,
+            'bg' => $upload
         );
 
         $newCategory = $this->categoryRepository->createCategory($data);
@@ -72,16 +67,17 @@ class CategoryController extends Controller
     }
 
     public function updateCategory(UpdateCategoryRequest $request, $slug) {
-        $validated = $request->safe()->only([
-            'name',
-            'description',
-            'status'
-        ]);
+      // if($request->hasFile('image')) {
+      //   dd('yes');
+      // }
+      //   dd($request->all());
+        $category = $this->categoryRepository->category($slug);
 
         $data = array(
-            'name' => $validated['name'],
-            'description' => $validated['description'],
-            'status' => $validated['status'] ? 'ACTIVE' : 'INACTIVE'
+            'name' => $request->name,
+            'description' => $request->description,
+            'status' => $request->status ? 'ACTIVE' : 'INACTIVE',
+            'bg' => $category->bg ?? Cloudinary::upload($request->image->getRealPath())->getSecurePath()
         );
 
         $updated = $this->categoryRepository->updateCategory($slug, $data);
@@ -92,5 +88,5 @@ class CategoryController extends Controller
             return redirect()->back()->with('success', 'Category updated successfully');
         }
     }
-    
+
 }

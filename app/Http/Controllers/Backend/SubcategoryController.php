@@ -9,12 +9,13 @@ use App\Interfaces\SubcategoryRepositoryInterface;
 use App\Interfaces\CategoryRepositoryInterface;
 use App\Enums\StatusEnum;
 use App\Models\Category;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class SubcategoryController extends Controller
 {
     private SubcategoryRepositoryInterface $subcategoryRepository;
     private CategoryRepositoryInterface $categoryRepository;
-    
+
     public function __construct(
         SubcategoryRepositoryInterface $subcategoryRepository,
         CategoryRepositoryInterface $categoryRepository
@@ -44,15 +45,16 @@ class SubcategoryController extends Controller
     }
 
     public function createSubcsategory(CreateSubcategoryRequest $request) {
-        $validated = $request->safe()->only([
-            'name',
-            'category_id',
-        ]);
+
+        $upload = Cloudinary::upload($request->image->getRealPath())->getSecurePath();
 
         $data = array(
-            'name' => $validated['name'],
-            'category_id' => $validated['category_id'],
+            'name' => $request->name,
+            'category_id' => $request->category_id,
+            'bg' => $upload
         );
+
+
 
         $newsubcategory = $this->subcategoryRepository->create_sub_category($data);
 
@@ -75,17 +77,17 @@ class SubcategoryController extends Controller
     }
 
     public function updateSubcategory(UpdateSubcategoryRequest $request, $slug) {
-        $validated = $request->safe()->only([
-            'name',
-            'category_id',
-            'status'
-        ]);
+        // dd($request->all());
+        $subcategory = $this->subcategoryRepository->subcategory($slug);
 
         $data = array(
-            'name' => $validated['name'],
-            'category_id' => $validated['category_id'],
-            'status' => $validated['status'] ? 'ACTIVE' : 'INACTIVE'
+            'name' => $request->name,
+            'category_id' => $request->category_id,
+            'status' => $request->status ? 'ACTIVE' : 'INACTIVE',
+            'bg' => $request->image ? Cloudinary::upload($request->image->getRealPath())->getSecurePath() : $subcategory->bg
         );
+
+        // dd($data);
 
         $updated = $this->subcategoryRepository->update_sub_category($slug, $data);
 

@@ -38,7 +38,7 @@
                             <ul>
                                 <li><a href="{{ route('get.women.area') }}">Women</a></li>
                                 <li class="static">
-                                    <a href="about-us.html">Men</a>
+                                    <a href="{{ route('get.men.area') }}">Men</a>
                                 </li>
                                 <li>
                                     <a href="blog.html">Fabrics</a>

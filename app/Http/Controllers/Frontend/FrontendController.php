@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Interfaces\FrontendRepositoryInterface;
+use App\Models\{SubCategory, Product};
 
 class FrontendController extends Controller
 {
@@ -34,6 +35,18 @@ class FrontendController extends Controller
 
       return view('pages.frontend.men.index', [
         'category' => $category
+      ]);
+    }
+
+    public function productByCategory($slug)
+    {
+      //get subcategory
+      $subcategory = SubCategory::where('slug', $slug)->select('id')->first();
+
+      $products = Product::where('sub_category_id', $subcategory->id)->get();
+
+      return view('pages.frontend.subcategories.index', [
+        'products' => $products
       ]);
     }
 }

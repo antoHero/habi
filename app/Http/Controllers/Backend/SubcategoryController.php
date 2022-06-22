@@ -84,7 +84,15 @@ class SubcategoryController extends Controller
             'name' => $request->name,
             'category_id' => $request->category_id,
             'status' => $request->status ? 'ACTIVE' : 'INACTIVE',
-            'bg' => $request->image ? Cloudinary::upload($request->image->getRealPath())->getSecurePath() : $subcategory->bg
+            'bg' => $request->image
+            ?
+            Cloudinary::upload($request->image->getRealPath(), [
+              'transformation' => [
+                'width' => 383,
+                'height' => 500
+              ]
+            ])->getSecurePath()
+            : $subcategory->bg
         );
 
         // dd($data);
@@ -94,7 +102,7 @@ class SubcategoryController extends Controller
         if(!$updated) {
             return redirect()->back()->with('error', 'Subcategory could not be updated');
         } else {
-            return redirect()->back()->with('success', 'Subcategory updated successfully');
+            return redirect()->route('all.subcategories')->with('success', 'Subcategory updated successfully');
         }
 
 

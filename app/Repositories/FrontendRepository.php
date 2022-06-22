@@ -25,4 +25,9 @@ class FrontendRepository implements FrontendRepositoryInterface {
   {
     return Category::ofSlug('men')->first();
   }
+
+  public function womenAreaByCategory($slug)
+  {
+    
+  }
 }

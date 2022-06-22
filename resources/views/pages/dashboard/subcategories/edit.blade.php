@@ -78,7 +78,7 @@
 
 
                                 <div class="image-area mt-4">
-                                    <img id="imageResult" src="{{ $subcategory->bg }}" alt="" class="rounded shadow-sm mx-auto d-block">
+                                    <img id="imageResult" src="{{ $subcategory->bg }}" alt="" class="rounded shadow-sm mx-auto d-block" height="383">
                                 </div>
 
                                 {{-- <input type="file" id="input-file-now" class="dropify" name="image" /> --}}

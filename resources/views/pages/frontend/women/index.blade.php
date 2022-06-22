@@ -35,24 +35,24 @@
 <!-- category area start -->
 <div id="category-area" class="category__area category__br-tp gray-bg-5 mb-20">
     <div class="container-fluid">
-        <div class="row row-cols-xxl-5 row-cols-xl-5 row-cols-lg-3 row-cols-md-2 row-cols-sm-2 row-cols-1 gx-0">
+        <div class="row row-cols-xxl-3 row-cols-xl-3 row-cols-lg-3 row-cols-md-2 row-cols-sm-2 row-cols-1 gx-0">
             @if(count($category->sub_categories) > 0)
               @foreach($category->sub_categories as $subcategory)
-              <div class="col">
+              <div class="col pb-10">
                   <div class="category__item category__br-right fix">
                       <div class="category__thumb">
-                          <a href="shop.html">
-                              <img src="{{ $subcategory->bg }}" height="300" width="500" alt="{{ $subcategory->name }}">
+                          <a href="{{ route('get.product.category.area', $subcategory->slug) }}">
+                              <img src="{{ $subcategory->bg }}" alt="{{ $subcategory->name }}">
                           </a>
                       </div>
                       <div class="category__content text-center">
                           <div class="category__tag mb-10">
-                              <a href="shop.html">#women's</a>
+                              <a href="{{ route('get.women.area') }}">#women</a>
                           </div>
                           <h3 class="category__title">
-                              <a href="shop.html">{{ $subcategory->name }}</a>
+                              <a href="{{ route('get.product.category.area', $subcategory->slug) }}">{{ $subcategory->name }}</a>
                           </h3>
-                          <a href="shop.html" class="link-btn" style="padding: 10px; background-color: #fff; color: #000;">Show now</a>
+                          <a href="{{ route('get.product.category.area', $subcategory->slug) }}" class="link-btn" style="padding: 10px; background-color: #fff; color: #000;">Show now</a>
                       </div>
                   </div>
               </div>

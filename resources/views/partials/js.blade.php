@@ -15,3 +15,14 @@
 <script src="{{ url('frontend_assets') }}/assets/js/imagesloaded.pkgd.min.js"></script>
 <script src="{{ url('frontend_assets') }}/assets/js/jquery.nice-select.min.js"></script>
 <script src="{{ url('frontend_assets') }}/assets/js/main.js"></script>
+
+<script>
+  function removeFromCart(id) {
+    if(confirm("About to remove item from cart")) {
+      var url = "{{url('/')}}"
+      $.get(url + '/cart/delete/' + id).done(function(response) {
+        window.location.reload();
+      })
+    }
+  }
+</script>

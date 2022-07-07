@@ -120,8 +120,9 @@
                                 <!-- <div class="product-quantity mb-20 mr-15">
                                     <div class="cart-plus-minus"><input type="text" value="1" /></div>
                                 </div> -->
-                                <div class="product-add-cart mb-20">
-                                    <button class="s-btn s-btn-2 s-btn-big" onclick="addToCart(event, {{$product->id}})">add to cart</button>
+                                <div class="product-add-cart mb-20 loading-button">
+                                  <a href="{{ route('cart.add', $product->id) }}" class="s-btn s-btn-2 s-btn-big" id="addToCartBtn" data-loading-text="<i class='fas fa-circle-notch fa-spin'></i>">add to cart</a>
+                                    <!-- <button class="s-btn s-btn-2 s-btn-big" onclick="addToCart(event, {{$product->id}})" id="addToCartBtn" data-loading-text="<i class='fas fa-circle-notch fa-spin'></i>">add to cart</button> -->
                                 </div>
                             </div>
                         </form>
@@ -375,15 +376,15 @@
 <!-- product info area end -->
 <script src="{{ url('frontend_assets') }}/assets/js/jquery.min.js"></script>
 <script type="">
-  var url = "{{ url('/') }}";
 
-  function addToCart(e,id) {
-    e.preventDefault()
-    console.log('slug', id)
-    $.get(url + '/cart/add/' + id).done(function(res) {
-      window.location.reload();
-    });
-  }
-
+// $('.loading-button').on('click', function() {
+//   var $this = $(this);
+//   $this.button('loading');
+//
+//   setTimeout(function() {
+//       $('#addToCartBtn').text('Loading...')
+//       $this.button('reset');
+//   }, 5000);
+// })
 </script>
 @endsection

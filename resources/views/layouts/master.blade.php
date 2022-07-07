@@ -3,9 +3,10 @@
 
 <head>
     @include('partials.css')
+    @notifyCss
 </head>
 
-<body>
+<body onload="getCart()">
 
     <!-- preloader start -->
     <div id="loading">
@@ -200,6 +201,9 @@
 
     <!-- JS here -->
     @include('partials.js')
+    
+    <x:notify-messages />
+    @notifyJs
 </body>
 
 </html>

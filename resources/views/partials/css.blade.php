@@ -21,3 +21,23 @@
 <link rel="stylesheet" href="{{ url('frontend_assets') }}/assets/css/nice-select.css">
 <link rel="stylesheet" href="{{ url('frontend_assets') }}/assets/css/ui-range-slider.css">
 <link rel="stylesheet" href="{{ url('frontend_assets') }}/assets/css/main.css">
+
+<style type="text/css">
+  /* .loading-button {
+    display: inline-flex;
+  	 flex-direction: column;
+  	 margin-top: 1em;
+  }
+  .loading-button button{
+    border-color: #000;
+  	background: #000;
+    color: #fff;
+  	margin: 0.25em 1em;
+  }
+  .loading-button button:active, .loading-button button:focus, .loading-button button.disabled {
+    background: #004d00 !important;
+    border-color: #004d00;
+  }
+
+   */
+</style>

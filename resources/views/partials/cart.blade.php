@@ -11,7 +11,7 @@
                 </div>
                 <div class="cartmini__list">
                   @if(session('cart'))
-                    <ul>
+                    <ul id="itemsInHabiCart">
                         @foreach(session('cart') as $key=>$product)
                         <li class="cartmini__item p-rel d-flex align-items-start">
                             <div class="cartmini__thumb mr-15">
@@ -41,10 +41,10 @@
                   @endforeach
                 <div class="cartmini__total d-flex align-items-center justify-content-between">
                     <h5>Total</h5>
-                    <span>{{ '₦'.number_format($total) }}</span>
+                    <span id="cartSumTotal">{{ '₦'.number_format($total) }}</span>
                 </div>
                 <div class="cartmini__bottom">
-                    <a href="cart.html" class="s-btn w-100 mb-20">view cart</a>
+                    <a href="{{ route('cart.get') }}" class="s-btn w-100 mb-20">view cart</a>
                     <a href="checkout.html" class="s-btn s-btn-2 w-100">checkout</a>
                 </div>
             </div>

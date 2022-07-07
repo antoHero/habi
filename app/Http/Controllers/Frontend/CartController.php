@@ -38,6 +38,10 @@ class CartController extends Controller
 
       session()->put('cart', $cart);
 
+      notify()->success('Product successfully added to cart', 'Added');
+
+      return redirect()->back();
+
       return response()->json([
         'success' => true,
         'cart' => $cart,
@@ -55,5 +59,14 @@ class CartController extends Controller
         'success' => true,
         'message' => 'Item removed from cart'
       ]);
+    }
+
+    public function cartItemsJquery() {
+      return session()->get('cart');
+    }
+
+    public function cart()
+    {
+      return view('pages.frontend.cart.index');
     }
 }

@@ -34,8 +34,9 @@ Route::controller(FrontendController::class)->group(function() {
 Route::controller(CartController::class)->group(function() {
   Route::prefix('cart')->group(function() {
     Route::get('/', 'cart')->name('cart.get');
+    Route::get('/fetch', 'cartItemsJquery');
     Route::get('/delete/{id}', 'removeFromCart')->name('cart.remove');
-    Route::get('add/{id}', 'addToCart');
+    Route::get('add/{id}', 'addToCart')->name('cart.add');
   });
 });
 

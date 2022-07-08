@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\SubcategoryController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\FabricController;
 use App\Http\Controllers\Frontend\FrontendController;
+use App\Http\Controllers\Frontend\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,13 +21,23 @@ use App\Http\Controllers\Frontend\FrontendController;
 */
 Route::controller(FrontendController::class)->group(function() {
   Route::get('/', 'home')->name('get.home');
-
+  Route::get('/product-json/{id}', 'productJson');
   Route::prefix('women')->group(function() {
     Route::get('/', 'womenArea')->name('get.women.area');
     Route::get('/{slug}', 'productByCategory')->name('get.product.category.area');
   });
 
   Route::get('/men', 'menArea')->name('get.men.area');
+  Route::get('product/details/{slug}', 'details')->name('product.details');
+});
+
+Route::controller(CartController::class)->group(function() {
+  Route::prefix('cart')->group(function() {
+    Route::get('/', 'cart')->name('cart.get');
+    Route::get('/fetch', 'cartItemsJquery');
+    Route::get('/delete/{id}', 'removeFromCart')->name('cart.remove');
+    Route::get('add/{id}', 'addToCart')->name('cart.add');
+  });
 });
 
 Route::get('/dashboard', function () {

@@ -6,14 +6,17 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Interfaces\FrontendRepositoryInterface;
 use App\Models\{SubCategory, Product};
+use App\Interfaces\ProductRepositoryInterface;
 
 class FrontendController extends Controller
 {
     private FrontendRepositoryInterface $frontendRepository;
+    private ProductRepositoryInterface $productRepository;
 
-    public function __construct(FrontendRepositoryInterface $frontendRepository)
+    public function __construct(FrontendRepositoryInterface $frontendRepository, ProductRepositoryInterface $productRepository)
     {
       $this->frontendRepository = $frontendRepository;
+      $this->productRepository = $productRepository;
     }
     public function home()
     {
@@ -47,6 +50,22 @@ class FrontendController extends Controller
 
       return view('pages.frontend.subcategories.index', [
         'products' => $products
+      ]);
+    }
+
+    public function productJson($id)
+    {
+        $product = Product::find($id);
+        return response()->json([
+          'status' => true,
+          'data' => $product,
+          'attributes' => $product->product_attributes
+        ]);
+    }
+
+    public function details($slug) {
+      return view('pages.frontend.details', [
+        'product' => $this->productRepository->apparel($slug)
       ]);
     }
 }

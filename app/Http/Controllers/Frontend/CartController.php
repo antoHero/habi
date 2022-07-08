@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Interfaces\CartRepositoryInterface;
 use App\Interfaces\ProductRepositoryInterface;
 use App\Models\Product;
+use Jackiedo\Cart\Cart;
 
 class CartController extends Controller
 {
@@ -14,29 +15,59 @@ class CartController extends Controller
 
     private ProductRepositoryInterface $productRepository;
 
-    public function __construct(CartRepositoryInterface $cartRepository, ProductRepositoryInterface $productRepository) {
+    protected $cart;
+
+    public function __construct(
+      CartRepositoryInterface $cartRepository,
+      ProductRepositoryInterface $productRepository,
+      Cart $cart
+    ) {
         $this->cartRepository = $cartRepository;
         $this->productRepository = $productRepository;
+        $this->cart = $cart;
     }
 
     public function addToCart($id) {
       $product = Product::findOrFail($id);
 
-      $cart = session()->get('cart', []);
+      $basket = $this->cart->name('basket');
 
-      if(isset($cart[$id])) {
-        $cart[$id]["quantity"]++;
-      } else {
-        $cart[$id] = [
-          "id" => $product->id,
-          "name" => $product->name,
-          "image" => $product->image,
-          "price" => $product->amount,
-          "quantity" => 1
-        ];
-      }
+      $recentlyViewed = $this->cart->newInstance('recently_viewed_items')->useForCommercial(false);
 
-      session()->put('cart', $cart);
+      $productItem = $basket->addItem([
+        'id' => $product->id,
+        'title' => $product->name,
+        'quantity' => 1,
+        'price' => $product->amount,
+        "extra_info" => [
+          "date_time" => [
+              "added_at" => time(),
+          ]
+        ]
+      ]);
+
+      $recent = $recentlyViewed->addItem([
+        'id' => $product->id,
+        'title' => $product->name,
+      ]);
+
+
+      // $cart = session()->get('cart', []);
+      //
+      // if(isset($cart[$id])) {
+      //   $cart[$id]["quantity"]++;
+      // } else {
+      //   $cart[$id] = [
+      //     "id" => $product->id,
+      //     "name" => $product->name,
+      //     "image" => $product->image,
+      //     "price" => $product->amount,
+      //     "quantity" => 1,
+      //
+      //   ];
+      // }
+
+      // session()->put('cart', $cart);
 
       notify()->success('Product successfully added to cart', 'Added');
 
@@ -67,6 +98,9 @@ class CartController extends Controller
 
     public function cart()
     {
-      return view('pages.frontend.cart.index');
+      $cart = $this->cart->name('basket');
+      return view('pages.frontend.cart.index', [
+        'items' => $cart->getDetails()->get('items')
+      ]);
     }
 }

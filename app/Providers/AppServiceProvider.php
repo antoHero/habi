@@ -3,6 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Jackiedo\Cart\Cart;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\App;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +26,23 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+      $shoppingCart = new Cart();
+      $cart = $shoppingCart->name('basket');
+
+      View::composer('*', function ($view) use($cart) {
+          $view->with('cartItems', $cart->getDetails()->get('items'));
+      });
+
+      if(App::environment() == "live")
+      {
+          $url = \Request::url();
+          $check = strstr($url,"http://");
+          if($check)
+          {
+             $newUrl = str_replace("http","https",$url);
+             header("Location:".$newUrl);
+
+          }
+      }
     }
 }

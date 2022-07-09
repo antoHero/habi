@@ -39,6 +39,7 @@ class CartController extends Controller
         'title' => $product->name,
         'quantity' => 1,
         'price' => $product->amount,
+        'image' => $product->image,
         "extra_info" => [
           "date_time" => [
               "added_at" => time(),
@@ -99,6 +100,7 @@ class CartController extends Controller
     public function cart()
     {
       $cart = $this->cart->name('basket');
+      // $cart->clearItems();
       return view('pages.frontend.cart.index', [
         'items' => $cart->getDetails()->get('items')
       ]);

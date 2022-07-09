@@ -10,21 +10,21 @@
                     </div>
                 </div>
                 <div class="cartmini__list">
-                  @if(session('cart'))
+                  @if(count($cartItems))
                     <ul id="itemsInHabiCart">
-                        @foreach(session('cart') as $key=>$product)
+                        @foreach($cartItems as $key=>$product)
                         <li class="cartmini__item p-rel d-flex align-items-start">
                             <div class="cartmini__thumb mr-15">
                                 <a href="product-details.html">
-                                    <img src="{{ $product['image'] }}" alt="">
+                                    <img src="{{ $product->image }}" alt="">
                                 </a>
                             </div>
                             <div class="cartmini__content">
                                 <h3 class="cartmini__title">
-                                    <a href="product-details.html">{{ $product['name'] }}</a>
+                                    <a href="product-details.html">{{ $product->title }}</a>
                                 </h3>
                                 <span class="cartmini__price">
-                                    <span class="price">{{ $product['quantity'] }} × {{ '₦'.number_format($product['price']) }}</span>
+                                    <span class="price">{{ $product->quantity }} × {{ '₦'.number_format($product->price) }}</span>
                                 </span>
                             </div>
                             <a class="cartmini__remove" onclick="removeFromCart({{$product['id']}})" style="cursor: pointer;">
@@ -36,8 +36,8 @@
                     @endif
                 </div>
                 @php $total = 0 @endphp
-                  @foreach((array) session('cart') as $id => $details)
-                      @php $total += $details['price'] * $details['quantity'] @endphp
+                  @foreach($cartItems as $id => $details)
+                      @php $total += $details->price * $details->quantity @endphp
                   @endforeach
                 <div class="cartmini__total d-flex align-items-center justify-content-between">
                     <h5>Total</h5>

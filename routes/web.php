@@ -37,6 +37,7 @@ Route::controller(CartController::class)->group(function() {
     Route::get('/fetch', 'cartItemsJquery');
     Route::get('/delete/{id}', 'removeFromCart')->name('cart.remove');
     Route::get('add/{id}', 'addToCart')->name('cart.add');
+    Route::post('update-quantity/{hash}', 'updateQuantity')->name('cart.update.quantity');
   });
 });
 

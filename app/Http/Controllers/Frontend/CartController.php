@@ -35,15 +35,18 @@ class CartController extends Controller
       $recentlyViewed = $this->cart->newInstance('recently_viewed_items')->useForCommercial(false);
 
       $productItem = $basket->addItem([
+        'model' => $product,
         'id' => $product->id,
         'title' => $product->name,
         'quantity' => 1,
         'price' => $product->amount,
-        'image' => $product->image,
+        'slug' => $product->slug,
         "extra_info" => [
           "date_time" => [
               "added_at" => time(),
-          ]
+          ],
+          'slug' => $product->slug,
+          'image' => $product->image,
         ]
       ]);
 
@@ -101,8 +104,22 @@ class CartController extends Controller
     {
       $cart = $this->cart->name('basket');
       // $cart->clearItems();
+      // dd($cart->getDetails()->get('items'));
       return view('pages.frontend.cart.index', [
         'items' => $cart->getDetails()->get('items')
       ]);
+    }
+
+    public function updateQuantity(Request $request, $hash) {
+      $cart = $this->cart->name('basket');
+
+      $product = $cart->updateItem($hash, [
+        'quantity' => $request->quantity
+      ]);
+
+      return response()->json([
+          'message' => 'Qty updated successfully',
+          'product' => $product
+      ],202);
     }
 }

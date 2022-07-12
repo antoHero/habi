@@ -6,7 +6,8 @@
     @notifyCss
 </head>
 
-<body onload="getCart()">
+<!-- <body onload="getCart()"> -->
+<body>
 
     <!-- preloader start -->
     <div id="loading">
@@ -201,7 +202,7 @@
 
     <!-- JS here -->
     @include('partials.js')
-    
+
     <x:notify-messages />
     @notifyJs
 </body>

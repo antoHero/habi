@@ -84,16 +84,23 @@ class CartController extends Controller
       ]);
     }
 
-    public function removeFromCart($id) {
-      $cart = session()->get('cart');
-      if(isset($cart[$id])) {
-        unset($cart[$id]);
-        session()->put('cart', $cart);
-      }
-      return response()->json([
-        'success' => true,
-        'message' => 'Item removed from cart'
-      ]);
+    public function removeFromCart($hash) {
+      $cart = $this->cart->name('basket');
+
+      $cart->removeItem($hash);
+
+      notify()->success('Product successfully removed from cart', 'Item removed');
+
+      return redirect()->back();
+      // $cart = session()->get('cart');
+      // if(isset($cart[$id])) {
+      //   unset($cart[$id]);
+      //   session()->put('cart', $cart);
+      // }
+      // return response()->json([
+      //   'success' => true,
+      //   'message' => 'Item removed from cart'
+      // ]);
     }
 
     public function cartItemsJquery() {
@@ -103,8 +110,6 @@ class CartController extends Controller
     public function cart()
     {
       $cart = $this->cart->name('basket');
-      // $cart->clearItems();
-      // dd($cart->getDetails()->get('items'));
       return view('pages.frontend.cart.index', [
         'items' => $cart->getDetails()->get('items')
       ]);

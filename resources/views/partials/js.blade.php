@@ -82,6 +82,71 @@ function numberWithCommas(amount) {
 </script> -->
 
 <script>
+
+$(document).on('click', '.inc', function(e) {
+  e.preventDefault();
+
+  var hash = $('.inc').data('id')
+  // var hash = $(this).attr("data-id");
+  console.log(hash)
+  var oldValue = parseInt($("input#quantity-"+hash).val());
+  // oldValue = $(this).val();
+
+  var quantity = parseFloat(oldValue);
+
+  $('#input-quantity-'+hash).val(quantity);
+
+  // var unit_price = $('.unit_price_'+id).text().replace(/,/g, '');
+
+  // var cart_total = $('#total_price').text().replace(/,/g, '');
+
+  // console.log('old value', quantity);
+
+  // $('.preloader').show();
+  // var id = $(this).attr("data-id");
+  $.ajax({
+      url: '/cart/update-quantity/'+ hash,
+      method: 'POST',
+      dataType: 'json',
+      data: {
+          _token: "{{ csrf_token() }}",
+          quantity: quantity
+      },
+      success: function(result)
+      {
+          window.location.reload();
+
+          // var product = result.product
+          // $('#quantity-'+id).val(product.qty);
+          //
+          // $('#subtotal_'+id).text(numberWithCommas(product.total_price))
+
+          // var price = $('.unit_price_'+id).text().replace(/,/g, '');
+
+          // var total = price * result[0];
+
+          // console.log('total first', total)
+
+          // $('.product-subtotal-'+id).text(numberWithCommas(total));
+
+          // var cartTotal = parseInt($('#total_price').text().replace(/,/g, ''));
+
+          // console.log('cart total amount', cartTotal)
+
+          // var grand_total = cartTotal + parseInt(result[1]);
+
+          // console.log('grand total amount', grand_total)
+
+          // $('#total_price').text(numberWithCommas(result[2]));
+
+          // grandTotal(total)
+      }
+  });
+});
+
+</script>
+
+<script>
 var delbtn = $('#delItemBtn')
 if(delbtn) {
   delbtn.click(function(){

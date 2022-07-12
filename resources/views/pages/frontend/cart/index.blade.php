@@ -48,10 +48,16 @@ My Cart
 
                             @foreach($items as $index=>$item)
                               <tr>
-                                  <td class="product-name"><a href="product-details.html">{{ $item->title }}</a></td>
+                                  <td class="product-name"><a href="{{ route('product.details', $item->model) }}">{{ $item->title }}</a></td>
                                   <td class="product-price"><span class="amount">{{ '₦ '.number_format($item->price) }}</span></td>
                                   <td class="product-quantity">
-                                      <div class="cart-plus-minus"><input type="text" value="1" min="1"/></div>
+                                      <div class="cart-plus-minus">
+                                        <div class="cart-plus-minus">
+                                          <input name="quantity" id="quantity-{{$index}}" type="text" value="{{ $item->quantity }}" min="1">
+                                          <div data-id="{{ $item->id }}" data-hash="{{ $index }}" class="dec qtybutton">-</div>
+                                          <div data-id="{{ $index }}" data-hash="{{ $index }}" class="inc qtybutton">+</div>
+                                        </div>
+                                      </div>
                                   </td>
                                   <td class="product-subtotal"><span class="amount">{{ '₦ '. number_format($item->quantity * $item->price) }}</span></td>
                                   <td class="product-remove"><a href="{{ route('cart.remove', $index) }}"><i class="fa fa-times"></i></a></td>

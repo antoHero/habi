@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Jackiedo\Cart\Contracts\UseCartable;
+use Jackiedo\Cart\Traits\CanUseCart;
 
-class Product extends Model
+class Product extends Model implements UseCartable
 {
-    use HasFactory, HasSlug, SoftDeletes;
+    use HasFactory, HasSlug, SoftDeletes, CanUseCart;
 
     protected $fillable = [
         'is_product',

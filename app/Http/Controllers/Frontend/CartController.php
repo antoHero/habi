@@ -122,9 +122,8 @@ class CartController extends Controller
         'quantity' => $request->quantity
       ]);
 
-      return response()->json([
-          'message' => 'Qty updated successfully',
-          'product' => $product
-      ],202);
+      notify()->success('Update on quantity was successful', 'Added');
+
+      return redirect()->back();
     }
 }

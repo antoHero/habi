@@ -32,7 +32,7 @@ My Cart
       @if(count($items))
       <div class="row">
           <div class="col-12">
-              <form action="#">
+              
                   <div class="table-content table-responsive">
                       <table class="table">
                           <thead>
@@ -51,13 +51,22 @@ My Cart
                                   <td class="product-name"><a href="{{ route('product.details', $item->model) }}">{{ $item->title }}</a></td>
                                   <td class="product-price"><span class="amount">{{ '₦ '.number_format($item->price) }}</span></td>
                                   <td class="product-quantity">
-                                      <div class="cart-plus-minus">
-                                        <div class="cart-plus-minus">
-                                          <input name="quantity" id="quantity-{{$index}}" type="text" value="{{ $item->quantity }}" min="1">
-                                          <div data-id="{{ $item->id }}" data-hash="{{ $index }}" class="dec qtybutton">-</div>
-                                          <div data-id="{{ $index }}" data-hash="{{ $index }}" class="inc qtybutton">+</div>
+                                        <div class="">
+                                            <form action="{{ route('cart.update.quantity', $index) }}" method="POST">
+                                                @csrf
+                                                <select name="quantity" id="quantity" onchange="this.form.submit()">
+                                                    @for ($i = 1; $i <= 5; $i++)
+                                                        <option value="{{ $i }}" {{ $item->quantity == $i ? 'selected' : ''}}>
+                                                            {{ $i }}
+                                                        </option>
+                                                    @endfor
+                                                </select>
+                                            </form>
+                                            
+                                          {{-- <input name="quantity" id="quantity-{{$index}}" type="text" value="{{ $item->quantity }}" min="1">
+                                          <div data-id="{{ $index }}" class="dec qtybutton">-</div>
+                                          <div data-id="{{ $index }}" id="productInCart" class="inc qtybutton">+</div> --}}
                                         </div>
-                                      </div>
                                   </td>
                                   <td class="product-subtotal"><span class="amount">{{ '₦ '. number_format($item->quantity * $item->price) }}</span></td>
                                   <td class="product-remove"><a href="{{ route('cart.remove', $index) }}"><i class="fa fa-times"></i></a></td>
@@ -84,7 +93,7 @@ My Cart
                           </div>
                       </div>
                   </div>
-              </form>
+              
           </div>
       </div>
       @else

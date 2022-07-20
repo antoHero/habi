@@ -152,11 +152,11 @@
                            <div class="canvas__menu fix ">
                               <div class="mobile-menu"></div>
                            </div>
-                           <div class="offcanvas__action mb-15">
+                           <div class="offcanvas__action mb-15 d-sm-block">
                               <a href="{{ route('login') }}">Login</a>
                            </div>
                            <div class="offcanvas__action mb-15 d-sm-block">
-                              <a href="cart.html" class="has-tag">
+                              <a href="{{ route('cart.get') }}" class="has-tag">
                                 <i class="far fa-shopping-bag"></i>
                                 <span class="tag">{{ count((array) session('cart')) }}</span>
                               </a>

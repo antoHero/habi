@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\SubcategoryController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\FabricController;
+use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\CartController;
 
@@ -41,9 +42,7 @@ Route::controller(CartController::class)->group(function() {
   });
 });
 
-Route::get('/dashboard', function () {
-    return view('pages.dashboard.index');
-});
+Route::get('/dashboard', [DashboarController::class, 'index'])->name('dashboard.index');
 
 Route::prefix('dashboard')->group(function() {
     Route::prefix('categories')->group(function() {

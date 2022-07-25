@@ -9,6 +9,7 @@ use App\Http\Controllers\Backend\FabricController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\CheckoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,10 +40,19 @@ Route::controller(CartController::class)->group(function() {
     Route::get('/delete/{hash}', 'removeFromCart')->name('cart.remove');
     Route::get('add/{id}', 'addToCart')->name('cart.add');
     Route::post('update-quantity/{hash}', 'updateQuantity')->name('cart.update.quantity');
+    Route::get('/checkout', function() {
+      return view('pages.frontend.cart.checkout');
+    });
   });
 });
 
-Route::get('/dashboard', [DashboarController::class, 'index'])->name('dashboard.index');
+Route::controller(CheckoutController::class)->group(function() {
+  Route::get('cart/checkout', 'index')->name('checkout');
+  Route::post('/pay', 'redirectToGateway')->name('pay');
+  Route::get('/payment/callback', 'handleGatewayCallback');
+});
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 
 Route::prefix('dashboard')->group(function() {
     Route::prefix('categories')->group(function() {

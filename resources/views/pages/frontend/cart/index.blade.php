@@ -89,7 +89,7 @@ My Cart
                                   <li>Subtotal <span>{{ '₦'.number_format($total) }}</span></li>
                                   <li>Total <span>{{ '₦'.number_format($total) }}</span></li>
                               </ul>
-                              <a class="s-btn s-btn-2" href="checkout.html">Proceed to checkout</a>
+                              <a class="s-btn s-btn-2" href={{ route('checkout') }}>Proceed to checkout</a>
                           </div>
                       </div>
                   </div>

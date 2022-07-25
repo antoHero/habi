@@ -45,7 +45,7 @@
                 </div>
                 <div class="cartmini__bottom">
                     <a href="{{ route('cart.get') }}" class="s-btn w-100 mb-20">view cart</a>
-                    <a href="checkout.html" class="s-btn s-btn-2 w-100">checkout</a>
+                    <a href="{{ route('checkout') }}" class="s-btn s-btn-2 w-100">checkout</a>
                 </div>
             </div>
         </div>

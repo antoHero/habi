@@ -184,7 +184,7 @@ return [
         App\Providers\RepositoryServiceProvider::class,
         CloudinaryLabs\CloudinaryLaravel\CloudinaryServiceProvider::class,
         Jackiedo\Cart\CartServiceProvider::class,
-
+        Unicodeveloper\Paystack\PaystackServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -214,6 +214,7 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
         'Cart' => Jackiedo\Cart\Facades\Cart::class,
+        'Paystack' => Unicodeveloper\Paystack\Facades\Paystack::class,
     ])->toArray(),
 
 ];

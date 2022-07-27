@@ -9,10 +9,16 @@ use Spatie\Sluggable\SlugOptions;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Jackiedo\Cart\Contracts\UseCartable;
 use Jackiedo\Cart\Traits\CanUseCart;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Product extends Model implements UseCartable
 {
     use HasFactory, HasSlug, SoftDeletes, CanUseCart;
+    
+    protected $appends = [
+        'total_order_items'
+    ];
 
     protected $fillable = [
         'is_product',
@@ -36,6 +42,8 @@ class Product extends Model implements UseCartable
         'detail',
         'status'
     ];
+
+    
 
      /**
      * Get the options for generating the slug.
@@ -79,13 +87,30 @@ class Product extends Model implements UseCartable
         'size' => 'array',
     ];
 
-    public function product_attributes()
+    public function product_attributes(): HasMany
     {
         return $this->hasMany(ProductAttribute::class);
     }
 
-    public function fabric()
+    public function fabric(): HasOne
     {
       return $this->hasOne(Fabric::class);
     }
+
+    public function items(): HasMany
+    {
+        return $this->hasMany(OrderItem::class);
+    }
+
+    public function getTotalOrderItemsAttribute()
+    {
+        return $this->items->count();
+    }
+
+    public function scopeMightAlsoLike($query)
+    {
+        return $query->inRandomOrder()->take(4);
+    }
+
+
 }

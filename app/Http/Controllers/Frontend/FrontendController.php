@@ -5,8 +5,9 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Interfaces\FrontendRepositoryInterface;
-use App\Models\{SubCategory, Product};
+use App\Models\{SubCategory, Product, OrderItem};
 use App\Interfaces\ProductRepositoryInterface;
+use Illuminate\Support\Facades\DB;
 
 class FrontendController extends Controller
 {
@@ -20,7 +21,22 @@ class FrontendController extends Controller
     }
     public function home()
     {
-      return view('welcome');
+      $topSellers = DB::table('products')
+                        ->leftJoin('order_items', 'products.id', '=', 'order_items.product_id')
+                        ->selectRaw('products.id, SUM(order_items.qty) as total')
+                        ->groupBy('products.id')
+                        ->orderBy('total', 'desc')
+                        ->take(4)
+                        ->get();
+      $bestSellers = Product::all()->sortByDesc('total_order_items')->take(4);
+      // $topProducts = [];
+      // foreach($topSellers as $s)
+      // {
+      //   $product = Product::findOrFail($s->id);
+      //   $product->qty = $s->total;
+      //   $topProducts[] = $product;
+      // }
+      return view('welcome', compact('bestSellers'));
     }
 
     public function womenArea()

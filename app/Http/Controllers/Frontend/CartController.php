@@ -55,33 +55,9 @@ class CartController extends Controller
         'title' => $product->name,
       ]);
 
-
-      // $cart = session()->get('cart', []);
-      //
-      // if(isset($cart[$id])) {
-      //   $cart[$id]["quantity"]++;
-      // } else {
-      //   $cart[$id] = [
-      //     "id" => $product->id,
-      //     "name" => $product->name,
-      //     "image" => $product->image,
-      //     "price" => $product->amount,
-      //     "quantity" => 1,
-      //
-      //   ];
-      // }
-
-      // session()->put('cart', $cart);
-
       notify()->success('Product successfully added to cart', 'Added');
 
       return redirect()->back();
-
-      return response()->json([
-        'success' => true,
-        'cart' => $cart,
-        'product' => $product
-      ]);
     }
 
     public function removeFromCart($hash) {

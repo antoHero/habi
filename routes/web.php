@@ -10,6 +10,7 @@ use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
+use App\Http\Controllers\Frontend\WishlistController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,6 +51,13 @@ Route::controller(CheckoutController::class)->group(function() {
   Route::get('cart/checkout', 'index')->name('checkout');
   Route::post('/pay', 'redirectToGateway')->name('pay');
   Route::get('/payment/callback', 'handleGatewayCallback');
+});
+
+Route::controller(WishlistController::class)->group(function() {
+  Route::prefix('wishlist')->group(function() {
+    Route::get('/', 'index')->name('wishlist.get');
+    Route::get('/{id}', 'addToWishlist')->name('wishlist.add');
+  });
 });
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');

@@ -168,7 +168,7 @@
                                     <i class="fal fa-eye"></i>
                                     <i class="fal fa-eye"></i>
                                 </a>
-                                <a href="#" class="icon-box icon-box-2">
+                                <a href="{{ route('wishlist.add', $product->id) }}" class="icon-box icon-box-2">
                                     <i class="fal fa-heart"></i>
                                     <i class="fal fa-heart"></i>
                                 </a>

@@ -56,7 +56,7 @@
                             <a href="login.html" class="d-none d-xxl-inline-block">Login / Register</a>
                             <div class="header-icon header-icon-2 d-inline-block ml-30">
                                 <a href="javascript:void(0)" class="search-toggle"><i class="fal fa-search"></i></a>
-                                <a href="wishlist.html" class="d-none d-xl-inline-block"><i class="fal fa-heart"></i><span>2</span></a>
+                                {{-- <a href="{{ route('wishlist.get') }}" class="d-none d-xl-inline-block"><i class="fal fa-heart"></i></a> --}}
                                 <button type="button" data-bs-toggle="modal" data-bs-target="#cartMiniModal"><i class="fal fa-shopping-cart"></i><span id="cartItemsCount">{{ count($cartItems) }}</span></button>
                             </div>
                         </div>

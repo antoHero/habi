@@ -42,7 +42,15 @@
                         <h4 class="card-title">Add New Category</h4>
                     </div><!--end card-header-->
                     <div class="card-body"> 
-
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <form action="{{ route('create.category') }}" method="POST">
                             @csrf
                             <label class="mb-2">Name</label>
@@ -52,7 +60,12 @@
                             <div class="mt-3">
                                 <label class="mb-2">Description</label>
                                 <textarea id="elm1" name="description"></textarea>
-                            </div>       
+                            </div>
+                            
+                            <div class="mt-3">
+                                <label class="mb-2">Background Image</label>
+                                <input type="file" name="image" class="form-control" maxlength="25">
+                            </div>
                             
                             <div class="mt-3">
                                 <button class="btn btn-primary" type="submit">Submit</button>

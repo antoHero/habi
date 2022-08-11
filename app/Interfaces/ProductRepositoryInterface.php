@@ -7,6 +7,8 @@ interface ProductRepositoryInterface {
     //methods for product
     public function createApparel(array $apparelInfo);
     public function getAllApparels();
+    public function getAllFabrics();
+    public function getAllAccessories();
     public function apparel($apparel);
     public function updateApparel($apparelSlug, array $apparelInfo);
     public function deleteApparel($apparelSlug);

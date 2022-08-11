@@ -122,6 +122,9 @@
                                 </div> -->
                                 <div class="product-add-cart mb-20 loading-button">
                                   <a href="{{ route('cart.add', $product->id) }}" class="s-btn s-btn-2 s-btn-big" id="addToCartBtn" data-loading-text="<i class='fas fa-circle-notch fa-spin'></i>">add to cart</a>
+                                  @if($product->type === "FABRIC")
+                                    <a href="{{ route('special.order', $product->slug) }}" class="s-btn s-btn-2 s-btn-big">Sew this for me</a>
+                                  @endif
                                     <!-- <button class="s-btn s-btn-2 s-btn-big" onclick="addToCart(event, {{$product->id}})" id="addToCartBtn" data-loading-text="<i class='fas fa-circle-notch fa-spin'></i>">add to cart</button> -->
                                 </div>
                             </div>

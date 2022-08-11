@@ -8,4 +8,22 @@ use Illuminate\Database\Eloquent\Model;
 class Measurement extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'user_id',
+        'product_id',
+        'measurement'
+    ];
+
+    protected $with = ['user', 'product'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class, 'product_id');
+    }
 }

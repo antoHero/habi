@@ -11,7 +11,8 @@ use App\Models\{
     Order, 
     TemporalOrder, 
     TemporalOrderItem,
-    OrderItem
+    OrderItem,
+    Product
 };
 use Illuminate\Support\Facades\{Redirect, DB};
 use Illuminate\Support\Str;

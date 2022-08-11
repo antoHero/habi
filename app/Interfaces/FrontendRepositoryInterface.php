@@ -7,4 +7,5 @@ interface FrontendRepositoryInterface {
   public function getLatestProducts();
   public function womenArea();
   public function menArea();
+  public function shop();
 }

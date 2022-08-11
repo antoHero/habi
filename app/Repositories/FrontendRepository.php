@@ -28,6 +28,11 @@ class FrontendRepository implements FrontendRepositoryInterface {
 
   public function womenAreaByCategory($slug)
   {
-    
+    //to be implemented or removed
+  }
+
+  public function shop() 
+  {
+    return Product::orderBy('created_at', 'desc')->paginate(12);
   }
 }

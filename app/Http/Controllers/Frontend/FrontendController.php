@@ -29,13 +29,7 @@ class FrontendController extends Controller
                         ->take(4)
                         ->get();
       $bestSellers = Product::all()->sortByDesc('total_order_items')->take(4);
-      // $topProducts = [];
-      // foreach($topSellers as $s)
-      // {
-      //   $product = Product::findOrFail($s->id);
-      //   $product->qty = $s->total;
-      //   $topProducts[] = $product;
-      // }
+   
       return view('welcome', compact('bestSellers'));
     }
 
@@ -83,5 +77,21 @@ class FrontendController extends Controller
       return view('pages.frontend.details', [
         'product' => $this->productRepository->apparel($slug)
       ]);
+    }
+
+    public function fabricsArea() {
+      $fabrics = $this->productRepository->getAllFabrics();
+      return view('pages.frontend.fabrics.index', compact('fabrics'));
+    }
+
+    public function accessoriesArea() {
+      $accessories = $this->productRepository->getAllAccessories();
+      return view('pages.frontend.accessories.index', compact('accessories'));
+    }
+
+    public function shop()
+    {
+      $products = $this->frontendRepository->shop();
+      return view('pages.frontend.shop.index', compact('products'));
     }
 }

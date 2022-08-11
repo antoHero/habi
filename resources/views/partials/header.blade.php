@@ -41,10 +41,10 @@
                                     <a href="{{ route('get.men.area') }}">Men</a>
                                 </li>
                                 <li>
-                                    <a href="blog.html">Fabrics</a>
+                                    <a href="{{ route('get.fabrics.area') }}">Fabrics</a>
                                 </li>
                                 <li>
-                                    <a href="about-us.html">Accessories</a>
+                                    <a href="{{ route('get.accessories.area') }}">Accessories</a>
                                 </li>
                             </ul>
                         </nav>

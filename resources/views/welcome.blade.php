@@ -99,7 +99,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="shop.html">
+                <a href="{{ route('get.fabrics.area') }}">
                     <div class="single-category single-category-2 mb-4-px p-rel wow fadeInUp" data-wow-delay=".3s">
                         <div class="cat-thumb fix">
                             <img src="{{ url('frontend_assets') }}/assets/images/fabrics2-bg.jpg" height="300" alt="#">
@@ -123,7 +123,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="shop.html">
+                <a href="{{ route('get.accessories.area') }}">
                     <div class="single-category single-category-2 mb-4-px p-rel wow fadeInUp" data-wow-delay=".3s">
                         <div class="cat-thumb fix">
                             <img src="{{ url('frontend_assets') }}/assets/images/acc-bg.jpg" height="385" alt="#">
@@ -189,7 +189,7 @@
             <div class="col-xxl-12">
                 <div class="btn-area text-center wow fadeInUp" data-wow-delay="1.2s">
                     <div class="p-btn p-btn-1">
-                        <a href="shop.html">SHOW ALL PRODUCTS</a>
+                        <a href="{{ route('shop.get') }}">SHOW ALL PRODUCTS</a>
                     </div>
                 </div>
             </div>

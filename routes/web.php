@@ -11,6 +11,7 @@ use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\WishlistController;
+use App\Http\Controllers\Frontend\SpecialOrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,16 +23,24 @@ use App\Http\Controllers\Frontend\WishlistController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/action-success', function() {
+  return view('pages.frontend.success.success');
+})->name('action.success');
+
 Route::controller(FrontendController::class)->group(function() {
   Route::get('/', 'home')->name('get.home');
   Route::get('/product-json/{id}', 'productJson');
-  Route::prefix('women')->group(function() {
-    Route::get('/', 'womenArea')->name('get.women.area');
+  Route::prefix('fashion/categories')->group(function() {
+    Route::get('/women', 'womenArea')->name('get.women.area');
+    Route::get('/men', 'menArea')->name('get.men.area');
+    Route::get('/fabrics', 'fabricsArea')->name('get.fabrics.area');
+    Route::get('/accessories', 'accessoriesArea')->name('get.accessories.area');
     Route::get('/{slug}', 'productByCategory')->name('get.product.category.area');
   });
 
-  Route::get('/men', 'menArea')->name('get.men.area');
+ 
   Route::get('product/details/{slug}', 'details')->name('product.details');
+  Route::get('/shop/ctas/all', 'shop')->name('shop.get');
 });
 
 Route::controller(CartController::class)->group(function() {
@@ -44,6 +53,13 @@ Route::controller(CartController::class)->group(function() {
     Route::get('/checkout', function() {
       return view('pages.frontend.cart.checkout');
     });
+  });
+});
+
+Route::controller(SpecialOrderController::class)->group(function() {
+  Route::prefix('measurement')->group(function() {
+    Route::get('create-special-order/{slug}', 'specialOrder')->name('special.order');
+    Route::post('submit/{slug}', 'submitMeasurement')->name('submit.measurement');
   });
 });
 

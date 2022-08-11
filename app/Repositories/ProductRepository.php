@@ -17,6 +17,16 @@ class ProductRepository implements ProductRepositoryInterface {
         return Product::ofType(ProductEnum::APPAREL()->value)->orderBy('created_at', 'desc')->get();
     }
 
+    public function getAllFabrics()
+    {
+        return Product::ofType(ProductEnum::FABRIC()->value)->orderBy('created_at', 'desc')->get();
+    }
+
+    public function getAllAccessories()
+    {
+        return Product::ofType(ProductEnum::ACCESSORY()->value)->orderBy('created_at', 'desc')->get();
+    }
+
     public function apparel($apparelSlug)
     {
         return Product::whereSlug($apparelSlug)->first();

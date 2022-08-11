@@ -15,24 +15,10 @@ return new class extends Migration
     {
         Schema::create('measurements', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('category_id')->nullable();
-            $table->float('chest')->nullable();
-            $table->float('neck')->nullable();
-            $table->float('shoulder')->nullable();
-            $table->float('arm_length')->nullable();
-            $table->float('men_bicep')->nullable();
-            $table->float('men_wrist')->nullable();
-            $table->float('back_length')->nullable();
-            $table->float('stomach')->nullable();
-            $table->float('waist')->nullable();
-            $table->float('hip')->nullable();
-            $table->float('crouch')->nullable();
-            $table->float('thigh')->nullable();
-            $table->float('bust')->nullable();
-            $table->float('shoulder_bust')->nullable();
-            $table->float('full_height')->nullable();
-            $table->float('waist_to_floor_length')->nullable();
-            $table->float('ankle')->nullable();
+            $table->unsignedBigInteger('user_id');
+            $table->string('product_id')->nullable();
+            $table->string('measurement')->nullable();
+            $table->string('status')->default('RECEIVED');
             $table->timestamps();
         });
     }

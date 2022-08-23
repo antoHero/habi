@@ -5,11 +5,8 @@
                 <div class="widget f-widget pb-30 wow fadeInUp" data-wow-delay=".4s">
                     <h5 class="f-widget-title white-color">Information</h5>
                     <ul>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Customer Service</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Page 404</a></li>
-                        <li><a href="#">Sizing Guide</a></li>
+                        <li><a href="{{ route('about.get') }}">About Us</a></li>
+                        <li><a href="{{ route('about.get') }}">Size Guide</a></li>
                     </ul>
                 </div>
             </div>

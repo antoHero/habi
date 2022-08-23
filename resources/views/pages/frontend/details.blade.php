@@ -375,6 +375,7 @@
             </div>
         </div>
     </div>
+    @include('partials.size_guide')
 </section>
 <!-- product info area end -->
 <script src="{{ url('frontend_assets') }}/assets/js/jquery.min.js"></script>

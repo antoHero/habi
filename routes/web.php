@@ -41,6 +41,7 @@ Route::controller(FrontendController::class)->group(function() {
  
   Route::get('product/details/{slug}', 'details')->name('product.details');
   Route::get('/shop/ctas/all', 'shop')->name('shop.get');
+  Route::get('about-us/who-we-are', 'about')->name('about.get');
 });
 
 Route::controller(CartController::class)->group(function() {

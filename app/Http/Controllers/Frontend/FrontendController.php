@@ -94,4 +94,9 @@ class FrontendController extends Controller
       $products = $this->frontendRepository->shop();
       return view('pages.frontend.shop.index', compact('products'));
     }
+
+    public function about()
+    {
+      return view('pages.frontend.company.about');
+    }
 }

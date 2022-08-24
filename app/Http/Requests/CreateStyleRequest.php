@@ -28,7 +28,7 @@ class CreateStyleRequest extends FormRequest
             'price' => ['numeric', 'required'],
             'description' => ['string', 'required'],
             'category_id' => ['numeric', 'required'],
-            'image' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
+            'image' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg,webp', 'max:2048', 'dimensions:width=788, height=1000'],
         ];
     }
 }

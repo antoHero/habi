@@ -31,11 +31,13 @@ Route::get('/action-success', function() {
 Route::controller(FrontendController::class)->group(function() {
   Route::get('/', 'home')->name('get.home');
   Route::get('/product-json/{id}', 'productJson');
+  Route::get('/style-json/{id}', 'styleJson');
   Route::prefix('fashion/categories')->group(function() {
     Route::get('/women', 'womenArea')->name('get.women.area');
     Route::get('/men', 'menArea')->name('get.men.area');
     Route::get('/fabrics', 'fabricsArea')->name('get.fabrics.area');
     Route::get('/accessories', 'accessoriesArea')->name('get.accessories.area');
+    Route::get('/styles', 'stylesArea')->name('get.styles.area');
     Route::get('/{slug}', 'productByCategory')->name('get.product.category.area');
   });
 

@@ -46,6 +46,9 @@
                                 <li>
                                     <a href="{{ route('get.accessories.area') }}">Accessories</a>
                                 </li>
+                                <li>
+                                    <a href="{{ route('get.styles.area') }}">Styles</a>
+                                </li>
                             </ul>
                         </nav>
                     </div>

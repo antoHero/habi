@@ -9,6 +9,7 @@ interface ProductRepositoryInterface {
     public function getAllApparels();
     public function getAllFabrics();
     public function getAllAccessories();
+    public function getAllStyles();
     public function apparel($apparel);
     public function updateApparel($apparelSlug, array $apparelInfo);
     public function deleteApparel($apparelSlug);

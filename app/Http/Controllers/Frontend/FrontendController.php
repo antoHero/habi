@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Interfaces\FrontendRepositoryInterface;
-use App\Models\{SubCategory, Product, OrderItem};
+use App\Models\{SubCategory, Product, OrderItem, Style};
 use App\Interfaces\ProductRepositoryInterface;
 use Illuminate\Support\Facades\DB;
 
@@ -73,6 +73,15 @@ class FrontendController extends Controller
         ]);
     }
 
+    public function styleJson($id)
+    {
+      $style = Style::find($id);
+      return response()->json([
+        'status' => true,
+        'data' => $style,
+      ]);
+    }
+
     public function details($slug) {
       return view('pages.frontend.details', [
         'product' => $this->productRepository->apparel($slug)
@@ -87,6 +96,11 @@ class FrontendController extends Controller
     public function accessoriesArea() {
       $accessories = $this->productRepository->getAllAccessories();
       return view('pages.frontend.accessories.index', compact('accessories'));
+    }
+
+    public function stylesArea() {
+      $styles = $this->productRepository->getAllStyles();
+      return view('pages.frontend.styles.index', compact('styles'));
     }
 
     public function shop()

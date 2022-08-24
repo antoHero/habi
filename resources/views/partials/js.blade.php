@@ -26,6 +26,33 @@
     }
 
     var base_url = "{{ url('/') }}"
+
+    $('.openStyleModal').on('click', function(e) {
+        e.preventDefault()
+        var dataId = $(this).attr("data-id");
+        $('.productAJTitle').html('')
+        $('.productAJDesc').html('')
+        $('#productModalThumb').html('')
+        $('#productModalNav').html('')
+        $('.product__modal-quantity form').html('')
+        $.get(base_url + '/style-json/' + dataId, function(response) {
+            var addToCartUrl = base_url + '/cart/add/' + response.data['id']
+            var csrf = $('meta[name="csrf-token"]').attr('content')
+            $('.productAJTitle').html(response.data['name'])
+            $('.productAJDesc').html(response.data['description'])
+
+            $('#productModalThumb').append(
+                '<div class="tab-pane fade item" id="pro-'+response.data['id']+'" role="tabpanel" aria-labelledby="pro-'+response.data['id']+'-tab">'+
+                    '<div class="product__modal-thumb w-img">'+
+                        '<img src="'+response.data['image']+'" alt="">'+
+                    '</div>'+
+                '</div>'
+            )
+          
+            $('#productModalThumb .item:first').addClass('show active')
+            $('#productModalNav li button:first').addClass('active')
+        })
+    })
     
     $('.openModal').on('click', function(e) {
         e.preventDefault()

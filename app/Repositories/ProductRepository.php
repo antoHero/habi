@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Repositories;
-use App\Models\{Product, ProductAttribute};
+use App\Models\{Product, ProductAttribute, Style};
 use App\Interfaces\ProductRepositoryInterface;
 use App\Enums\{ProductEnum};
 
@@ -25,6 +25,11 @@ class ProductRepository implements ProductRepositoryInterface {
     public function getAllAccessories()
     {
         return Product::ofType(ProductEnum::ACCESSORY()->value)->orderBy('created_at', 'desc')->get();
+    }
+
+    public function getAllStyles()
+    {
+        return Style::orderBy('created_at', 'desc')->paginate(8);
     }
 
     public function apparel($apparelSlug)

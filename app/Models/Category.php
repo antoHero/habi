@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Category extends Model
 {
@@ -47,5 +48,10 @@ class Category extends Model
     public function scopeOfSlug($query, $slug)
     {
         return $query->where('slug', $slug);
+    }
+
+    public function styles(): HasMany
+    {
+        return $this->hasMany(Style::class);
     }
 }

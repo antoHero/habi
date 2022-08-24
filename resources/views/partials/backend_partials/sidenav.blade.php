@@ -35,6 +35,7 @@
                     <li class="nav-item"><a class="nav-link" href="{{ route('all.apparels') }}"><i class="ti-control-record"></i>Apparels</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('fabrics.index') }}"><i class="ti-control-record"></i>Fabrics </a></li>
                     <li class="nav-item"><a class="nav-link" href="apps-calendar.html"><i class="ti-control-record"></i>Accessories</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('styles.index') }}"><i class="ti-control-record"></i>Styles</a></li>
 
                 </ul>
             </li>

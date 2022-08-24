@@ -20,6 +20,8 @@ use App\Interfaces\CartRepositoryInterface;
 use App\Repositories\CartRepository;
 use App\Interfaces\SpecialOrderRepositoryInterface;
 use App\Repositories\SpecialOrderRepository;
+use App\Interfaces\StyleRepositoryInterface;
+use App\Repositories\StyleRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -38,6 +40,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(FrontendRepositoryInterface::class, FrontendRepository::class);
         $this->app->bind(CartRepositoryInterface::class, CartRepository::class);
         $this->app->bind(SpecialOrderRepositoryInterface::class, SpecialOrderRepository::class);
+        $this->app->bind(StyleRepositoryInterface::class, StyleRepository::class);
     }
 
     /**

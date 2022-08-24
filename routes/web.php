@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\SubcategoryController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\FabricController;
 use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\Backend\StyleController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
@@ -136,6 +137,19 @@ Route::prefix('dashboard')->group(function() {
         Route::post('/create', 'createNewFabric')->name('create.new.fabric');
         Route::get('/{slug}', 'getFabric')->name('get.fabric');
         Route::put('/{slug}', 'updateFabric')->name('update.fabric');
+      });
+    });
+
+    //routes for styles
+
+    Route::prefix('styles')->group(function() {
+      Route::controller(StyleController::class)->group(function() {
+        Route::get('/', 'stylesIndex')->name('styles.index');
+        Route::get('/create/style', 'create')->name('styles.new');
+        Route::post('/create/style', 'store')->name('styles.store');
+        Route::get('/style/{style:slug}', 'style')->name('style.style');
+        Route::put('/style/{style:slug}', 'updateStyle')->name('style.update');
+        Route::get('style/delete/{style:slug}', 'delete')->name('style.delete');
       });
     });
 

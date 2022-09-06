@@ -23,6 +23,7 @@
 <link rel="stylesheet" href="{{ url('frontend_assets') }}/assets/css/ui-range-slider.css">
 <link rel="stylesheet" href="{{ url('frontend_assets') }}/assets/css/main.css">
 
+@include('partials.custom_css')
 <style type="text/css">
   /* .loading-button {
     display: inline-flex;

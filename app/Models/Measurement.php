@@ -12,10 +12,11 @@ class Measurement extends Model
     protected $fillable = [
         'user_id',
         'product_id',
+        'style_id',
         'measurement'
     ];
 
-    protected $with = ['user', 'product'];
+    protected $with = ['user', 'product', 'style'];
 
     public function user()
     {
@@ -25,5 +26,10 @@ class Measurement extends Model
     public function product()
     {
         return $this->belongsTo(Product::class, 'product_id');
+    }
+
+    public function style()
+    {
+        return $this->belongsTo(Style::class, 'style_id');
     }
 }

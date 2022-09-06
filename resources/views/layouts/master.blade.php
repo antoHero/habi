@@ -2,6 +2,8 @@
 <html class="no-js" lang="zxx">
 
 <head>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    
     @include('partials.css')
     @notifyCss
 </head>
@@ -202,7 +204,7 @@
 
     <!-- JS here -->
     @include('partials.js')
-
+    @yield('custom_js')
     <x:notify-messages />
     @notifyJs
 </body>

@@ -63,6 +63,7 @@ Route::controller(CartController::class)->group(function() {
 Route::controller(SpecialOrderController::class)->group(function() {
   Route::prefix('measurement')->group(function() {
     Route::get('create-special-order/{slug}', 'specialOrder')->name('special.order');
+    Route::get('/styles/{category:id}', 'styles');
     Route::post('submit/{slug}', 'submitMeasurement')->name('submit.measurement');
   });
 });

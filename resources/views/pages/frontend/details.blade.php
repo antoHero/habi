@@ -148,6 +148,7 @@
                                     </p>
                                 </div>
                             </li>
+                            @if($product->type != 'FABRIC')
                             <li>
                                 <div class="product-sku">
                                     <span>Category</span>
@@ -156,6 +157,7 @@
                                     </p>
                                 </div>
                             </li>
+                            @endif
                         </ul>
                     </div>
                     <div class="product__details-social d-sm-flex align-items-center">

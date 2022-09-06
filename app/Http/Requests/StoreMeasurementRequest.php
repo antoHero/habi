@@ -24,6 +24,7 @@ class StoreMeasurementRequest extends FormRequest
     public function rules()
     {
         return [
+            'style' => ['required', 'string'],
             'measurement' => ['required', 'mimes:pdf,docx,doc,jpeg,jpg,png', 'max:2048'],
         ];
     }

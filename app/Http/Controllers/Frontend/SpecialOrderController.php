@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Http\Requests\StoreMeasurementRequest;
 use App\Interfaces\SpecialOrderRepositoryInterface;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
-use App\Models\Product;
+use App\Models\{Product, Style, Category};
 
 class SpecialOrderController extends Controller
 {
@@ -20,7 +19,9 @@ class SpecialOrderController extends Controller
     public function specialOrder($slug)
     {
         $product = $this->getproduct($slug);
-        return view('pages.frontend.cart.order', compact('product'));
+        $styles = Style::all();
+        $categories = Category::all();
+        return view('pages.frontend.cart.order', compact('product', 'styles', 'categories'));
     }
 
     public function submitMeasurement(StoreMeasurementRequest $request, $slug)
@@ -32,6 +33,7 @@ class SpecialOrderController extends Controller
         $data = array(
             'user_id' => auth()->user()->id,
             'product_id' => $product->id,
+            'style_id' => $request->validated()['style'],
             'measurement' => $upload
         );
 
@@ -44,6 +46,13 @@ class SpecialOrderController extends Controller
     public function getProduct($slug)
     {
        return Product::whereSlug($slug)->firstOrFail();
+    }
+
+    public function styles(Category $category) {
+        
+        $styles = $category->styles;
+
+        return response()->json($styles);
     }
 
 }

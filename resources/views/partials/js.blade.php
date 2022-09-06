@@ -15,6 +15,7 @@
 <script src="{{ url('frontend_assets') }}/assets/js/imagesloaded.pkgd.min.js"></script>
 <script src="{{ url('frontend_assets') }}/assets/js/jquery.nice-select.min.js"></script>
 <script src="{{ url('frontend_assets') }}/assets/js/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <!-- @notifyJs -->
 
 <script>
@@ -26,6 +27,11 @@
     }
 
     var base_url = "{{ url('/') }}"
+
+    $('.openSelectStyleModal').on('click', function(e) {
+        e.preventDefault();
+        
+    })
 
     $('.openStyleModal').on('click', function(e) {
         e.preventDefault()
@@ -56,7 +62,7 @@
     
     $('.openModal').on('click', function(e) {
         e.preventDefault()
-        var dataId = $(this).attr("data-id");
+        let dataId = $(this).attr("data-id");
         $('.productAJTitle').html('')
         $('.productAJPrice').html('')
         $('.productAJDesc').html('')
@@ -140,7 +146,7 @@
     $(document).ready(function(){
         $('.submitMeasurementBtn').prop('disabled', true)
         $('.submitMeasurementBtn').html('Choose Measurement First')
-             $('#upload-file').change(function() {
+            $('#upload-file').change(function() {
                 var filename = $(this).val();
                 $('#file-upload-name').html(filename);
                 if(filename!=""){
@@ -155,5 +161,29 @@
                     }, 1600);
                 }
             });
+    });
+
+    $('input[data-list]').each(function () {
+        let availableTags = $('#' + $(this).attr("data-list")).find('option').map(function () {
+            return this.value;
+        }).get();
+
+        $(this).autocomplete({
+            source: availableTags
+        }).on('focus', function () {
+            $(this).autocomplete('search', ' ');
+        }).on('search', function () {
+            if ($(this).val() === '') {
+            $(this).autocomplete('search', ' ');
+            }
         });
+    });
+
+    $(document).ready(function() {
+        $('.js-example-basic-single').select2();
+    });
+
+    // $(document).ready(function() {
+    //     $('.getting_styles').select2();
+    // });
 </script>

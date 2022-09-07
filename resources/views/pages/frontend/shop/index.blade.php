@@ -30,10 +30,17 @@
                                                 <a href="#">Add to cart</a>
                                             </div>
                                             <div class="product-action product-action-1 p-abs">
-                                                <a href="#" data-bs-toggle="modal" data-bs-target="#productModal" class="icon-box icon-box-1 openModal" data-id="{{ $product->id }}">
-                                                    <i class="fal fa-eye"></i>
-                                                    <i class="fal fa-eye"></i>
-                                                </a>
+                                                @if($product->type === 'APPAREL')
+                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#productModal" class="icon-box icon-box-1 openModal" data-id="{{ $product->id }}">
+                                                        <i class="fal fa-eye"></i>
+                                                        <i class="fal fa-eye"></i>
+                                                    </a>
+                                                @else
+                                                    <a href="{{ route('product.details', $product->slug) }}"  class="icon-box icon-box-1">
+                                                        <i class="fal fa-eye"></i>
+                                                        <i class="fal fa-eye"></i>
+                                                    </a>
+                                                @endif
                                                 <a href="#" class="icon-box icon-box-1">
                                                     <i class="fal fa-heart"></i>
                                                     <i class="fal fa-heart"></i>

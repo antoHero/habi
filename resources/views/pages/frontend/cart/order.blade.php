@@ -56,6 +56,7 @@ Special Order {{ $product->slug }}
                             </div>
                             
                         </div>
+                        @if($product->type === 'APPAREL')
                         <div class="country-select mt-20">
                            <label for="">For:</label>
                             <select class="form-control" id="styleSelect" onchange="getStyles()" style="height: 50px;">
@@ -71,8 +72,8 @@ Special Order {{ $product->slug }}
                                  
                              </select>
                          </div>
-                        
-                        <div class="showUploadDiv">
+                        @endif
+                        <div class="showUploadDiv pt-20">
                             {{-- <a  class="s-btn s-btn-2 w-100 submitMeasurementBtn">{{ __('Create A New Account') }}</a> --}}
                             <button type="submit" class="s-btn s-btn-2 w-100 submitMeasurementBtn submitMeasurementBtn">Submit</button>
                         </div>

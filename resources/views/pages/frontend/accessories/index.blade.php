@@ -3,6 +3,7 @@
 @section('content')
 
 <!-- slider area start -->
+@if(count($accessories))
 <section class="slider-area-rel">
     <div class="slider-active slider-active-6 s-dot-style dot-style dot-style-1 dot-bottom-left-2 ">
         <div class="single-slider single-slider-3 slider-height-2 d-flex align-items-center cream-bg">
@@ -30,6 +31,7 @@
 <!-- slider area end -->
 
 <!-- category area start -->
+
 <div id="category-area" class="category__area category__br-tp gray-bg-5 mb-20">
     <div class="container-fluid">
         <div class="row pb-20">
@@ -70,7 +72,25 @@
         @include('partials.modal')
     </div>
 </div>
+@else 
+<div class="subscribe-area pb-100 gray-bg-2 pt-15">
+    <div class="container">
+        <div class="row">
+            <div class="col-xxl-12">
+                <div class="section-title text-center">
+                    <i class="fal fa-frown fa-7x text-default" aria-hidden="true"></i>
 
+                    <span class="p-subtitle mt-5">Oops! There's nothing here</span>
+                    
+                </div>
+                <div class="text-center mt-50">
+                    <a href="{{ url('/') }}" class="subscribe-btn subscribe-btn-1">Continue shopping</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endif
 <!-- category area end -->
 
 @endsection

@@ -12,6 +12,7 @@
         <div class="row">
             <div class="col-xxl-6 col-xl-6 col-lg-6">
                 <div class="product__details-nav-wrapper d-sm-flex align-items-center">
+                    @if ($product->type === 'APPAREL')
                     <div class="product__details-nav mr-120">
                         <ul class="nav nav-tabs flex-sm-column" id="productDetailsNav" role="tablist">
                           @if(count($product->product_attributes) > 0)
@@ -31,6 +32,7 @@
                             @endif
                           </ul>
                     </div>
+                    @endif
                     <div class="product__details-thumb">
                         <div class="tab-content" id="productDetailsTabContent">
                           @if(count($product->product_attributes) > 0)
@@ -79,7 +81,9 @@
                         </div>
                     </div>
                     <p class="product-des">{!! $product->detail !!}</p>
-
+                    @if ($product->type === 'APPAREL')
+                        
+                    
                     <div class="product__details-color d-sm-flex align-items-center mb-25">
                         <span>Color:</span>
                         <ul>
@@ -114,6 +118,7 @@
                         </ul>
                         <button type="button" class="product-size-guide-btn float-sm-end" data-bs-toggle="modal" data-bs-target="#productSizeModal">Size Guide</button>
                     </div>
+                    @endif
                     <div class="product__details-action">
                         <form action="#">
                             <div class="product__details-quantity d-sm-flex align-items-center">
@@ -123,7 +128,7 @@
                                 <div class="product-add-cart mb-20 loading-button">
                                   <a href="{{ route('cart.add', $product->id) }}" class="s-btn s-btn-2 s-btn-big" id="addToCartBtn" data-loading-text="<i class='fas fa-circle-notch fa-spin'></i>">add to cart</a>
                                   @if($product->type === "FABRIC")
-                                    <a href="{{ route('special.order', $product->slug) }}" class="s-btn s-btn-2 s-btn-big">Sew this for me</a>
+                                    <a href="{{ route('special.order', $product->slug) }}" class="s-btn s-btn-2 s-btn-big sewThis">Sew this for me</a>
                                   @endif
                                     <!-- <button class="s-btn s-btn-2 s-btn-big" onclick="addToCart(event, {{$product->id}})" id="addToCartBtn" data-loading-text="<i class='fas fa-circle-notch fa-spin'></i>">add to cart</button> -->
                                 </div>

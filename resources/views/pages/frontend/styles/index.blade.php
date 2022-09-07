@@ -40,7 +40,7 @@
                         <img src="{{ $style->image }}" alt="{{ $style->slug }}">
                         <img src="{{ $style->image }}" alt="{{ $style->slug }}">
                         <div class="cart-btn cart-btn-1 p-abs">
-                            <a href="{{ route('product.details', $style->slug) }}">View</a>
+                            <a href="{{ route('style.details', $style->slug) }}">View</a>
                         </div>
                         <div class="product-action product-action-1 p-abs">
                             <a href="#" data-bs-toggle="modal" data-bs-target="#productModal" class="icon-box icon-box-1 openStyleModal" data-id="{{ $style->id }}">
@@ -54,7 +54,7 @@
                         </div>
                     </div>
                     <div class="product-content">
-                        <h4 class="pro-title pro-title-1 text-center"><a href="{{ route('product.details', $style->slug) }}">{{ $style->name }}</a></h4>
+                        <h4 class="pro-title pro-title-1 text-center"><a href="{{ route('style.details', $style->slug) }}">{{ $style->name }}</a></h4>
                     </div>
                 </div>
             </div>

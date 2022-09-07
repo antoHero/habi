@@ -88,6 +88,11 @@ class FrontendController extends Controller
       ]);
     }
 
+    public function styleDetails($slug) {
+      $style = Style::whereSlug($slug)->first();
+      return view('pages.frontend.styles.details', compact('style'));
+    }
+
     public function fabricsArea() {
       $fabrics = $this->productRepository->getAllFabrics();
       return view('pages.frontend.fabrics.index', compact('fabrics'));

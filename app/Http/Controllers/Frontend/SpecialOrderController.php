@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Enums\ProductEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreMeasurementRequest;
 use App\Interfaces\SpecialOrderRepositoryInterface;
@@ -27,13 +28,14 @@ class SpecialOrderController extends Controller
     public function submitMeasurement(StoreMeasurementRequest $request, $slug)
     {
         $product = $this->getproduct($slug);
-        
+
         $upload = Cloudinary::upload($request->validated()['measurement']->getRealPath())->getSecurePath();
 
         $data = array(
             'user_id' => auth()->user()->id,
             'product_id' => $product->id,
-            'style_id' => $request->validated()['style'],
+            'style_id' => $product->type == ProductEnum::FABRIC() ? $request->validated()['style'] : $product->id,
+            'type' => $product->type == ProductEnum::FABRIC() ? ProductEnum::STYLE() : ProductEnum::STYLE(),
             'measurement' => $upload
         );
 
@@ -45,7 +47,16 @@ class SpecialOrderController extends Controller
 
     public function getProduct($slug)
     {
-       return Product::whereSlug($slug)->firstOrFail();
+        $product = Product::whereSlug($slug)->first();
+        
+        if(!$product)
+        {
+            $product = Style::whereSlug($slug)->first();
+
+            return $product;
+        }
+
+        return $product;
     }
 
     public function styles(Category $category) {

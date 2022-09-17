@@ -20,6 +20,7 @@ use Brian2694\Toastr\Facades\Toastr;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Support\Str;
 use App\Models\Product;
+use App\Models\Style;
 
 class ProductController extends Controller
 {
@@ -68,7 +69,7 @@ class ProductController extends Controller
             'qty',
             'size',
             'occasion',
-            'style',
+            'style_id',
             'material',
             'detail',
             'category_id',
@@ -94,7 +95,7 @@ class ProductController extends Controller
             'qty' => $validated['qty'],
             'size' => implode(',', $validated['size']),
             'occasion' => $validated['occasion'],
-            'style' => $validated['style'],
+            'style_id' => $validated['style_id'],
             'material' => $validated['material'],
             'detail' => $validated['detail'],
             'category_id' => $validated['category_id'],

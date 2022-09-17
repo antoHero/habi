@@ -28,6 +28,7 @@ Route::get('/action-success', function() {
   return view('pages.frontend.success.success');
 })->name('action.success');
 
+Route::get('measurement/styles/{category:id}', [FrontendController::class, 'styles']);
 Route::controller(FrontendController::class)->group(function() {
   Route::get('/', 'home')->name('get.home');
   Route::get('/product-json/{id}', 'productJson');
@@ -64,7 +65,7 @@ Route::controller(CartController::class)->group(function() {
 Route::controller(SpecialOrderController::class)->group(function() {
   Route::prefix('measurement')->group(function() {
     Route::get('create-special-order/{slug}', 'specialOrder')->name('special.order');
-    Route::get('/styles/{category:id}', 'styles');
+    // Route::get('/styles/{category:id}', 'styles');
     Route::post('submit/{slug}', 'submitMeasurement')->name('submit.measurement');
   });
 });

@@ -58,12 +58,4 @@ class SpecialOrderController extends Controller
 
         return $product;
     }
-
-    public function styles(Category $category) {
-        
-        $styles = $category->styles;
-
-        return response()->json($styles);
-    }
-
 }

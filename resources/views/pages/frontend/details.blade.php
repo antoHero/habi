@@ -11,54 +11,14 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xxl-6 col-xl-6 col-lg-6">
-                <div class="product__details-nav-wrapper d-sm-flex align-items-center">
+                <div class="">
                     @if ($product->type === 'APPAREL')
-                    <div class="product__details-nav mr-120">
-                        <ul class="nav nav-tabs flex-sm-column" id="productDetailsNav" role="tablist">
-                          @if(count($product->product_attributes) > 0)
-                          @foreach($product->product_attributes as $attribute)
-                            <li class="nav-item" role="presentation">
-                              <button class="nav-link active" id="pro-nav-1-tab" data-bs-toggle="tab" data-bs-target="#pro-nav-{{$attribute->id}}" type="button" role="tab" aria-controls="pro-nav-{{$attribute->id}}" aria-selected="true">
-                                  <img src="{{ $attribute->image }}" alt="" height="102" width="80">
-                              </button>
-                            </li>
-                            @endforeach
-                            @else
-                            <li class="nav-item" role="presentation">
-                              <button class="nav-link active" id="pro-nav-1-tab" data-bs-toggle="tab" data-bs-target="#pro-nav-1" type="button" role="tab" aria-controls="pro-nav-1" aria-selected="true">
-                                  <img src="{{ $product->image }}" alt="{{ $product->slug }}" height="102" width="80">
-                              </button>
-                            </li>
-                            @endif
-                          </ul>
-                    </div>
+                    @include('partials.carousel')
+
                     @endif
-                    <div class="product__details-thumb">
-                        <div class="tab-content" id="productDetailsTabContent">
-                          @if(count($product->product_attributes) > 0)
-                          @foreach($product->product_attributes as $attribute)
-                            <div class="tab-pane fade show active" id="pro-nav-{{$attribute->id}}" role="tabpanel" aria-labelledby="pro-nav-1-tab">
-                                <div class="product-nav-thumb-wrapper">
-                                    <a href="{{ $attribute->image }}" class="product-img-zoom popup-image">
-                                        <i class="fal fa-compress"></i>
-                                    </a>
-                                    <img src="{{ $attribute->image }}" alt="" height="321" width="400">
-                                </div>
-                            </div>
-                            @endforeach
-                            @else
-                            <div class="tab-pane fade show active" id="pro-nav-1" role="tabpanel" aria-labelledby="pro-nav-1-tab">
-                                <div class="product-nav-thumb-wrapper">
-                                    <a href="{{ $product->image }}" class="product-img-zoom popup-image">
-                                        <i class="fal fa-compress"></i>
-                                    </a>
-                                    <img src="{{ $product->image }}" alt="{{ $product->slug }}" height="321" width="400">
-                                </div>
-                            </div>
-                            @endif
-                          </div>
-                    </div>
                 </div>
+
+                {{-- @include('partials.carousel') --}}
             </div>
             <div class="col-xxl-4 col-xl-6 col-lg-6">
                 <div class="product__details-content pt-60">
@@ -82,59 +42,52 @@
                     </div>
                     <p class="product-des">{!! $product->detail !!}</p>
                     @if ($product->type === 'APPAREL')
-                        
-                    
-                    <div class="product__details-color d-sm-flex align-items-center mb-25">
-                        <span>Color:</span>
-                        <ul>
-                            <li><a href="#" class="black"></a></li>
-                            <li><a href="#" class="active brown"></a></li>
-                            <li><a href="#" class="blue"></a></li>
-                            <li><a href="#" class="red"></a></li>
-                            <li><a href="#" class="white"></a></li>
-                        </ul>
-                    </div>
-                    <div class="product__details-size d-sm-flex align-items-center mb-30">
-                        <span>Size: </span>
-                        <ul class="mr-30">
-                            <li>
-                                <a href="#" class="unavailable">S</a>
-                            </li>
-                            <li>
-                                <a href="#" >M</a>
-                            </li>
-                            <li>
-                                <a href="#">L</a>
-                            </li>
-                            <li>
-                                <a href="#">XL</a>
-                            </li>
-                            <li>
-                                <a href="#">2XL</a>
-                            </li>
-                            <li>
-                                <a href="#">3XL</a>
-                            </li>
-                        </ul>
-                        <button type="button" class="product-size-guide-btn float-sm-end" data-bs-toggle="modal" data-bs-target="#productSizeModal">Size Guide</button>
-                    </div>
-                    @endif
-                    <div class="product__details-action">
-                        <form action="#">
-                            <div class="product__details-quantity d-sm-flex align-items-center">
-                                <!-- <div class="product-quantity mb-20 mr-15">
-                                    <div class="cart-plus-minus"><input type="text" value="1" /></div>
-                                </div> -->
-                                <div class="product-add-cart mb-20 loading-button">
-                                  <a href="{{ route('cart.add', $product->id) }}" class="s-btn s-btn-2 s-btn-big" id="addToCartBtn" data-loading-text="<i class='fas fa-circle-notch fa-spin'></i>">add to cart</a>
-                                  @if($product->type === "FABRIC")
-                                    <a href="{{ route('special.order', $product->slug) }}" class="s-btn s-btn-2 s-btn-big sewThis">Sew this for me</a>
-                                  @endif
-                                    <!-- <button class="s-btn s-btn-2 s-btn-big" onclick="addToCart(event, {{$product->id}})" id="addToCartBtn" data-loading-text="<i class='fas fa-circle-notch fa-spin'></i>">add to cart</button> -->
+
+                    <form action="{{ route('cart.add', $product->id) }}" method="POST">
+                        @csrf
+                        <div class="product__details-color d-sm-flex align-items-center mb-25">
+                            <span>Color:</span>
+                            
+                            <ul>
+                                @foreach($product->product_attributes as $key => $attribute)
+                                    <li>
+                                        <input type="radio" name="color" id="cor{{$key}}" value="{{ $attribute->color }}" />
+                                        <label for="cor{{$key}}" class="cor{{$key}}" style="background-color: {{ $attribute->color }};"></label>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        <div class="product__details-size d-sm-flex align-items-center mb-30">
+                            <span>Size: </span>
+                            <ul class="mr-30">
+                                <li>
+                                    <a href="#" class="unavailable">S</a>
+                                </li>
+                                @foreach(explode(",", $product->size) as $key => $size)
+                                <input type="radio" name="size" id="appsize{{$key}}" value="{{ $size }}" />
+                                        <label for="appsize{{$key}}" class="appsize{{$key}}">{{ $size }}</label>
+                                
+                                @endforeach
+                            </ul>
+                            <button type="button" class="product-size-guide-btn float-sm-end" data-bs-toggle="modal" data-bs-target="#productSizeModal">Size Guide</button>
+                        </div>
+                        @endif
+                        <div class="product__details-action">
+                                <div class="product__details-quantity d-sm-flex align-items-center">
+                                    <!-- <div class="product-quantity mb-20 mr-15">
+                                        <div class="cart-plus-minus"><input type="text" value="1" /></div>
+                                    </div> -->
+                                    <div class="product-add-cart mb-20 loading-button">
+                                      <button type="submit" class="s-btn s-btn-2 s-btn-big" id="addToCartBtn" data-loading-text="<i class='fas fa-circle-notch fa-spin'></i>">add to cart</button>
+                                      @if($product->type === "FABRIC")
+                                        <a href="{{ route('special.order', $product->slug) }}" class="s-btn s-btn-2 s-btn-big sewThis">Sew this for me</a>
+                                      @endif
+                                        <!-- <button class="s-btn s-btn-2 s-btn-big" onclick="addToCart(event, {{$product->id}})" id="addToCartBtn" data-loading-text="<i class='fas fa-circle-notch fa-spin'></i>">add to cart</button> -->
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
-                    </div>
+                        </div>
+
+                    </form>
                     <div class="product__details-meta mb-25">
                         <ul>
                             <li>

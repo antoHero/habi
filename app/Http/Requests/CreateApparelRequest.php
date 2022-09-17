@@ -35,8 +35,11 @@ class CreateApparelRequest extends FormRequest
               'required'
             ],
             'image' => [
-              'image',
-              'required'
+              'required', 
+              'image', 
+              'mimes:jpeg,png,jpg,gif,svg,webp,jfif', 
+              'max:2048', 
+              'dimensions:width=788, height=1000'
             ],
             'qty' => [
               'numeric',
@@ -51,10 +54,9 @@ class CreateApparelRequest extends FormRequest
               'required',
               'max:25'
             ],
-            'style' => [
-              'string',
+            'style_id' => [
+              'numeric',
               'required',
-              'max:25'
             ],
             'material' => [
               'string',

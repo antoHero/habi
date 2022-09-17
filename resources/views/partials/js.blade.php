@@ -183,6 +183,12 @@
         $('.js-example-basic-single').select2();
     });
 
+    function debugRadio() {
+        console.log('clicked radio btn')
+    }
+
+
+    
     // $(document).ready(function() {
     //     $('.getting_styles').select2();
     // });

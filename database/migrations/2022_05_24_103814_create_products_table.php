@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Style;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -28,7 +29,7 @@ return new class extends Migration
             $table->json('size')->nullable();
             $table->string('gallery')->nullable();
             $table->string('occasion')->nullable();
-            $table->string('style')->nullable();
+            $table->foreignIdFor(Style::class)->nullable();
             $table->string('material')->nullable();
             $table->string('slug')->nullable();
             $table->longText('detail')->nullable();

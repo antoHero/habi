@@ -137,11 +137,13 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4 my-2 control-label">
+                                <div class="col-md-4 my-2 control-label hideStyle d-none">
                                     <div class="my-2">
                                         <div class="">
                                             <label class="mb-2">Style</label>
-                                            <input type="text" placeholder="Style" class="form-control" maxlength="25" name="style" id="defaultconfig" value="{{ old('style') }}" />
+                                            <select name="style_id" id="" class="form-control getting_styles" value="{{ old('sub_category_id') }}">
+                                                
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -193,9 +195,6 @@
             var base_url = '{{ url('/') }}';
             let id = $('#apparelCat').val();
 
-
-            console.log('logging from jquery', id);
-
             if(id)
             {
                 $.ajax({
@@ -207,7 +206,19 @@
                         $('.getting_subcat').empty();
                         $.each(result, function(key, value) {
 
-                            $('.getting_subcat').append('<option class="form-control" value="">--select--</option> <option class="form-control" value="'+value['id']+'">'+value['name']+'</option>');
+                            $('.getting_subcat').append('<option class="form-control" value="'+value['id']+'">'+value['name']+'</option>');
+                        })
+
+                        $.ajax({
+                            url: base_url + '/measurement/styles/' + id,
+                            method: 'GET',
+                            success: function(response) {
+                                $('.hideStyle').removeClass('d-none')
+                                $('.getting_styles').empty();
+                                $.each(response, function(index, style) {
+                                    $('.getting_styles').append('<option class="form-control" value="'+style['id']+'">'+style['name']+'</option>');
+                                })
+                            }
                         })
                     }
                 });

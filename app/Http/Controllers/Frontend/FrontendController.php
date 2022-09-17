@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Interfaces\FrontendRepositoryInterface;
-use App\Models\{SubCategory, Product, OrderItem, Style};
+use App\Models\{Category, SubCategory, Product, OrderItem, Style};
 use App\Interfaces\ProductRepositoryInterface;
 use Illuminate\Support\Facades\DB;
 
@@ -83,6 +83,10 @@ class FrontendController extends Controller
     }
 
     public function details($slug) {
+      // dd(explode("," ,$this->productRepository->apparel($slug)->size));
+      // foreach($this->productRepository->apparel($slug)->size as $size) {
+      //   dd($size);
+      // }
       return view('pages.frontend.details', [
         'product' => $this->productRepository->apparel($slug)
       ]);
@@ -118,4 +122,11 @@ class FrontendController extends Controller
     {
       return view('pages.frontend.company.about');
     }
+
+    public function styles(Category $category) {
+        
+      $styles = $category->styles;
+
+      return response()->json($styles);
+  }
 }

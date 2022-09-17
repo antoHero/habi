@@ -51,11 +51,27 @@
                             <ul>
                                 @foreach($product->product_attributes as $key => $attribute)
                                     <li>
-                                        <input type="radio" name="color" id="cor{{$key}}" value="{{ $attribute->color }}" />
-                                        <label for="cor{{$key}}" class="cor{{$key}}" style="background-color: {{ $attribute->color }};"></label>
+                                        <input 
+                                            type="radio" 
+                                            name="color" 
+                                            class="@error('color') is-invalid @enderror" 
+                                            id="cor{{$key}}" 
+                                            value="{{ $attribute->color }}" 
+                                        />
+                                        <label 
+                                            for="cor{{$key}}" 
+                                            class="cor{{$key}}" 
+                                            style="background-color: {{ $attribute->color }};"
+                                        ></label>
+
                                     </li>
                                 @endforeach
                             </ul>
+                        </div>
+                        <div class="mb-5">
+                            @error('color')
+                                <p style="font-size: 12px; color: red;">{{ $message }}</p>
+                            @enderror
                         </div>
                         <div class="product__details-size d-sm-flex align-items-center mb-30">
                             <span>Size: </span>
@@ -64,19 +80,36 @@
                                     <a href="#" class="unavailable">S</a>
                                 </li>
                                 @foreach(explode(",", $product->size) as $key => $size)
-                                <input type="radio" name="size" id="appsize{{$key}}" value="{{ $size }}" />
-                                        <label for="appsize{{$key}}" class="appsize{{$key}}">{{ $size }}</label>
-                                
+                                    <li>
+                                        <input 
+                                            type="radio" 
+                                            name="size" 
+                                            class="@error('size') is-invalid @enderror" 
+                                            id="appsize{{$key}}" 
+                                            value="{{ $size }}" 
+                                        />
+                                        <label 
+                                            for="appsize{{$key}}" 
+                                            class="appsize{{$key}}"
+                                        >{{ $size }}</label>
+                                        
+                                    </li>
+                                    
                                 @endforeach
+
                             </ul>
+
                             <button type="button" class="product-size-guide-btn float-sm-end" data-bs-toggle="modal" data-bs-target="#productSizeModal">Size Guide</button>
+                            
+                        </div>
+                        <div class="mb-5">
+                            @error('size')
+                                <p style="font-size: 12px; color: red;">{{ $message }}</p>
+                            @enderror
                         </div>
                         @endif
                         <div class="product__details-action">
                                 <div class="product__details-quantity d-sm-flex align-items-center">
-                                    <!-- <div class="product-quantity mb-20 mr-15">
-                                        <div class="cart-plus-minus"><input type="text" value="1" /></div>
-                                    </div> -->
                                     <div class="product-add-cart mb-20 loading-button">
                                       <button type="submit" class="s-btn s-btn-2 s-btn-big" id="addToCartBtn" data-loading-text="<i class='fas fa-circle-notch fa-spin'></i>">add to cart</button>
                                       @if($product->type === "FABRIC")

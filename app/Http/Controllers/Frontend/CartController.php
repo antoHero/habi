@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Interfaces\CartRepositoryInterface;
 use App\Interfaces\ProductRepositoryInterface;
+use App\Http\Requests\AddToCartRequest;
 use App\Models\Product;
 use Jackiedo\Cart\Cart;
 
@@ -27,8 +28,7 @@ class CartController extends Controller
         $this->cart = $cart;
     }
 
-    public function addToCart($id) {
-      $product = Product::findOrFail($id);
+    public function addToCart(AddToCartRequest $request, Product $product) {
 
       $basket = $this->cart->name('basket');
 
@@ -47,6 +47,8 @@ class CartController extends Controller
           ],
           'slug' => $product->slug,
           'image' => $product->image,
+          'size' => $request->validated()['size'],
+          'color' => $request->validated()['color'],
         ]
       ]);
 

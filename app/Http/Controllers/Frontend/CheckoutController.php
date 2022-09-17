@@ -41,23 +41,23 @@ class CheckoutController extends Controller
      * Redirect the User to Paystack Payment Page
      * @return Url
      */
-    public function redirectToGateway(Request $request)
+    public function redirectToGateway(CheckoutRequest $request)
     {   
         return DB::transaction(function() use($request) {
             $basket = $this->cart->name('basket');
             
             $temporalOrder = TemporalOrder::create([
                 'user_id' => auth()->user()->id,
-                'name' => $request->firstname ." ". $request->lastname,
-                'phone' => $request->phone,
-                'email' => $request->email,
-                'address' => $request->address,
-                'country' => $request->country,
-                'state' => $request->state,
-                'city' => $request->city,
+                'name' => $request->validated()['firstname'] ." ". $request->validated()['lastname'],
+                'phone' => $request->validated()['phone'],
+                'email' => $request->validated()['email'],
+                'address' => $request->validated()['address'],
+                'country' => $request->validated()['country'],
+                'state' => $request->validated()['state'],
+                'city' => $request->validated()['city'],
                 'tracking_id' => $this->generateTrackingId(),
                 'reference' => $request->reference,
-                'code' => $request->code,
+                'code' => $request->validated()['code'],
                 'status' => 'Pending'
             ]);
             foreach($basket->getDetails()->get('items') as $item) {
@@ -66,7 +66,9 @@ class CheckoutController extends Controller
                     'product_id' => $item->id,
                     'name' => $item->title,
                     'qty' => $item->quantity,
-                    'amount' => $item->price
+                    'amount' => $item->price,
+                    'size' => $item->extra_info['size'],
+                    'color' => $item->extra_info['color'],
                 ]);
             }
 
@@ -122,18 +124,24 @@ class CheckoutController extends Controller
                         'note' => ''
                     ]);
 
-                    foreach($basket->getDetails()->get('items') as $item) {
+                    $orderItems = TemporalOrderItem::where('temporal_order_id', $temporalOrder->id)->get();
+                    // dd($orderItems);
+                    foreach($orderItems as $item) {
                         OrderItem::create([
                             'order_id' => $order->id,
-                            'product_id' => $item->id,
-                            'name' => $item->title,
-                            'qty' => $item->quantity,
-                            'amount' => $item->price
+                            'product_id' => $item->product_id,
+                            'name' => $item->name,
+                            'qty' => $item->qty,
+                            'amount' => $item->amount,
+                            'size' => $item->size,
+                            'color' => $item->color,
                         ]);
+
+
+                        $item->delete();
                     }
 
-                    $temporalOrder->status = "Paid";
-                    $temporalOrder->save();
+                    $temporalOrder->delete();
 
                     notify()->success('Payment was successful', 'Success');
                     $basket->clearItems();

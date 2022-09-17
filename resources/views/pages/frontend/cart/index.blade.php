@@ -48,7 +48,12 @@ My Cart
 
                             @foreach($items as $index=>$item)
                               <tr>
-                                  <td class="product-name"><a href="{{ route('product.details', $item->model) }}">{{ $item->title }}</a></td>
+                                  <td class="product-name">
+                                    <a href="{{ route('product.details', $item->model) }}">{{ $item->title }}</a>
+                                    <p>
+                                      <span class="price">Size: {{ $item->extra_info['size'] }} </span> | <span class="price">Color: <span  style="border: 1px solid #000; background-color: {{ $item->extra_info['color'] }}; width: 100px; color: #000;">Color</span></span>
+                                    </p>
+                                  </td>
                                   <td class="product-price"><span class="amount">{{ '₦ '.number_format($item->price) }}</span></td>
                                   <td class="product-quantity">
                                         <div class="">

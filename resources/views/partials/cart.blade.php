@@ -16,15 +16,21 @@
                         <li class="cartmini__item p-rel d-flex align-items-start">
                             <div class="cartmini__thumb mr-15">
                                 <a href="product-details.html">
-                                    <img src="{{ $product->image }}" alt="">
+                                    <img src="{{ $product->extra_info['image'] }}" alt="">
                                 </a>
                             </div>
                             <div class="cartmini__content">
                                 <h3 class="cartmini__title">
-                                    <a href="product-details.html">{{ $product->title }}</a>
+                                    <a href="{{ route('product.details', $product->extra_info['slug']) }}">{{ $product->title }}</a>
                                 </h3>
                                 <span class="cartmini__price">
                                     <span class="price">{{ $product->quantity }} × {{ '₦'.number_format($product->price) }}</span>
+                                </span> |
+                                <span class="cartmini__price">
+                                    <span class="price">Size: {{ $product->extra_info['size'] }} </span>
+                                </span> |
+                                <span class="cartmini__price">
+                                    <span class="price">Color: <span  style="border: 1px solid #000; background-color: {{ $product->extra_info['color'] }}; width: 100px; color: #000;">Color</span></span>
                                 </span>
                             </div>
                             <a class="cartmini__remove" onclick="removeFromCart({{$product['id']}})" style="cursor: pointer;">

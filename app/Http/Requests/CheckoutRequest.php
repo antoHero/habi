@@ -31,7 +31,7 @@ class CheckoutRequest extends FormRequest
             'city' => ['required', 'string'],
             'state' => ['required', 'string'],
             'code' => ['required', 'string'],
-            'email' => ['required', 'string'],
+            'email' => ['required', 'email:rfc, dns'],
             'phone' => ['required', 'string'],
             'reference' => ['required', 'string'],
             'password' => ['nullable', 'string'],

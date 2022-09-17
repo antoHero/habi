@@ -15,7 +15,9 @@ class TemporalOrderItem extends Model
         'product_id',
         'name',
         'amount',
-        'qty'
+        'qty',
+        'size',
+        'color'
     ];
 
     public function temporal_order(): BelongsTo

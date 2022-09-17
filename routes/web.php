@@ -54,7 +54,7 @@ Route::controller(CartController::class)->group(function() {
     Route::get('/', 'cart')->name('cart.get');
     Route::get('/fetch', 'cartItemsJquery');
     Route::get('/delete/{hash}', 'removeFromCart')->name('cart.remove');
-    Route::get('add/{id}', 'addToCart')->name('cart.add');
+    Route::post('add/{product:id}', 'addToCart')->name('cart.add');
     Route::post('update-quantity/{hash}', 'updateQuantity')->name('cart.update.quantity');
     Route::get('/checkout', function() {
       return view('pages.frontend.cart.checkout');

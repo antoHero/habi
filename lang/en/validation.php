@@ -151,6 +151,15 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'color' => [
+            'required' => 'Please pick a color',
+            'string' => 'This is not accepted',
+            'max' => 'Oops did you input the wrong data?'
+        ],
+        'size' => [
+            'required' => 'Please pick a size',
+            'string' => 'This is not accepted'
+        ],
     ],
 
     /*

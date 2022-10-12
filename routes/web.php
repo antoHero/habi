@@ -9,6 +9,7 @@ use App\Http\Controllers\Backend\FabricController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\StyleController;
 use App\Http\Controllers\Frontend\AccountController;
+use App\Http\Controllers\Frontend\AccountSettingsController;
 use App\Http\Controllers\Frontend\AddressController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\CartController;
@@ -47,6 +48,14 @@ Route::controller(AddressController::class)->group(function() {
     Route::get('/{address:id}', 'view')->name('user.get.address');
     Route::put('/{address:id}', 'updateAddress')->name('user.update.address');
     Route::get('/delete/{address:id}', 'delete')->name('user.delete.address');
+  });
+});
+
+Route::controller(AccountSettingsController::class)->group(function() {
+  Route::prefix('my-account')->middleware('auth')->group(function() {
+    Route::get('settings', 'settings')->name('user.account.settings');
+    Route::put('update-email', 'updateEmail')->name('user.update.email');
+    Route::put('update-password', 'updatePassword')->name('user.update.password');
   });
 });
 

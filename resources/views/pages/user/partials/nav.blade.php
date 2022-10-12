@@ -15,8 +15,11 @@
                         <a href="{{ route('user.delivery.address') }}">Address book</a>
                     </li>
 
-                    <li id="{{ Request::RouteIs('user.settings') ? 'active-link' : '' }}">
-                        <a href="{{ route('user.settings') }}">Settings</a>
+                    <li id="{{ Request::RouteIs('user.account.settings') ? 'active-link' : '' }}">
+                        <a href="{{ route('user.account.settings') }}">Settings</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('logout') }}">Sign Out</a>
                     </li>
                 </ul>
             </div>

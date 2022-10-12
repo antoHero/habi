@@ -220,7 +220,7 @@ svg:not(:root) {
     color: #fff;
 }
 
-@media (max-width: 575px)
+@media only screen and (min-width: 576px) and (max-width: 767px)
 .breadcrumb-area-2 {
     padding-top: 10px;
     padding-bottom: 10px;

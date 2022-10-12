@@ -5,7 +5,7 @@ My order history
 @endsection
 
 @section('content')
-<div class="breadcrumb-area-2 pt-10 pb-10 include-bg">
+<div class="breadcrumb-area-3 pt-10 pb-10 include-bg">
     <div class="container">
         <div class="row">
             <div class="col-xxl-12">     

@@ -28,9 +28,10 @@ class FrontendController extends Controller
                         ->orderBy('total', 'desc')
                         ->take(4)
                         ->get();
+      $products = Product::orderBy('created_at')->get();
       $bestSellers = Product::all()->sortByDesc('total_order_items')->take(4);
    
-      return view('welcome', compact('bestSellers'));
+      return view('welcome', compact('bestSellers', 'products'));
     }
 
     public function womenArea()

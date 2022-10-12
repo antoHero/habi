@@ -56,10 +56,10 @@
                 <div class="col-xxl-3 col-xl-2 col-lg-2 col-md-8 col-sm-6 col-8">
                     <div class="header-right-wrapper d-flex align-items-center justify-content-end">
                         <div class="header-right header-right-2 d-flex align-items-center justify-content-end">
-                            <a href="login.html" class="d-none d-xxl-inline-block">Login / Register</a>
+                            {{-- <a href="login.html" class="d-none d-xxl-inline-block">Login / Register</a> --}}
                             <div class="header-icon header-icon-2 d-inline-block ml-30">
                                 <a href="javascript:void(0)" class="search-toggle"><i class="fal fa-search"></i></a>
-                                {{-- <a href="{{ route('wishlist.get') }}" class="d-none d-xl-inline-block"><i class="fal fa-heart"></i></a> --}}
+                                <a href="{{ route('login') }}" title="My Account" class="d-none d-xl-inline-block"><i class="fal fa-user"></i></a>
                                 <button type="button" data-bs-toggle="modal" data-bs-target="#cartMiniModal"><i class="fal fa-shopping-cart"></i><span id="cartItemsCount">{{ count($cartItems) }}</span></button>
                             </div>
                         </div>

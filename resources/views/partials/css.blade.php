@@ -197,4 +197,21 @@ svg:not(:root) {
         transform: translate3d(-2000px, 0, 0);
     }
 }
+
+#active-link a {
+    color: #f57e60;
+}
+
+.is-invalid {
+    border: 2px solid red !important;
+}
+.default-address {
+    border: 2px solid #f57e60;
+}
+
+@media (max-width: 575px)
+.breadcrumb-area-2 {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
 </style>

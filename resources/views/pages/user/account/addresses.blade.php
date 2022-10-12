@@ -5,7 +5,7 @@ My order history
 @endsection
 
 @section('content')
-<div class="breadcrumb-area-2 pt-45 pb-45 include-bg">
+<div class="breadcrumb-area-2 pt-10 pb-10 include-bg">
     <div class="container">
         <div class="row">
             <div class="col-xxl-12">     
@@ -22,7 +22,7 @@ My order history
     </div>
 </div>
 
-<section class="blog__area pt-100 pb-100">
+<section class="blog__area pt-10 pb-30">
     <div class="container">
         <div class="row">
             
@@ -49,8 +49,8 @@ My order history
                                             </ul>
                                             <div class="about__me-social">
                                                 <ul>
-                                                    <li class="pb-10"><a href="{{ route('user.get.address', $address->id) }}" class="contact__form-btn mt-15">Edit</a></li>
-                                                    <li><a href="{{ route('user.delete.address', $address->id) }}" class="mt-15">Delete</a></li>
+                                                    <li class="pb-10"><a href="{{ route('user.get.address', $address->id) }}" class="contact__form-btn mt-15" id="editAddressBtn">Edit</a></li>
+                                                    <li><a href="{{ route('user.delete.address', $address->id) }}" class="mt-15" id="deleteAddressBtn">Delete</a></li>
                                                 </ul>
                                             </div>
                                         </div>

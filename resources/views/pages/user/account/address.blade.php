@@ -43,8 +43,9 @@ My order history
                                     </ul>
                                 </div>
                             @endif
-                            <form action="{{ route('user.store.address') }}" method="POST">
+                            <form action="{{ route('user.update.address', $address->id) }}" method="POST">
                                 @csrf
+                                @method('PUT')
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="checkout-form-list">

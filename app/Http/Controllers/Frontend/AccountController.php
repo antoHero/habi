@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAddressRequest;
+use App\Http\Requests\UpdateAddressRequest;
 use App\Models\{Address, Country, Order, OrderItem};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -29,74 +30,6 @@ class AccountController extends Controller
         $items = OrderItem::where('order_id', $order->id)->get();
         return view('pages.user.account.items', [
             'items' => $items
-        ]);
-    }
-
-    public function address()
-    {
-        $addresses = Address::where('user_id', auth()->user()->id)->get();
-        return view('pages.user.account.addresses', [
-            'addresses' => $addresses
-        ]);
-    }
-
-    public function newAddress()
-    {
-        $countries = Country::all();
-        return view('pages.user.account.new-address', [
-            'countries' => $countries
-        ]);
-    }
-
-    public function store(StoreAddressRequest $request)
-    {
-        //get the authenticated user
-        $user = auth()->user();
-
-        $data = $request->all();
-
-        return DB::transaction(function() use($user, $data) {
-            if(!isset($data['default'])) {
-                $data['default'] = 'No';
-            }
-    
-            if($data['default'] == 'Yes') {
-                //get user addresses
-                $address = $user->addresses()->where('is_default', 'Yes')->first();
-
-                //set default to No
-
-                $address->is_default = 'No';
-                $address->save();
-            }
-
-            //store new address
-            Address::create([
-                'user_id' => $user->id,
-                'firstname' => $data['firstname'],
-                'lastname' => $data['lastname'],
-                'phone' => $data['phone'],
-                'country' => $data['country'],
-                'state' => $data['state'],
-                'city' => $data['city'],
-                'code' => $data['code'],
-                'is_default' => $data['default'],
-                'address' => $data['address'],
-            ]);
-
-            notify()->success('Address successfully added', 'Added');
-
-            return redirect()->route('user.delivery.address');
-        });
-        
-    }
-
-    public function view(Address $address)
-    {
-        $countries = Country::all();
-        return view('pages.user.account.address', [
-            'address' => $address,
-            'countries' => $countries
         ]);
     }
 }

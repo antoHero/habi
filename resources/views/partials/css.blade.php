@@ -209,6 +209,17 @@ svg:not(:root) {
     border: 2px solid #f57e60;
 }
 
+#editAddressBtn {
+    background-color: #ffffff;
+    color: #f57e60;
+}
+
+#deleteAddressBtn {
+    background-color: #f57e60;
+    cursor: pointer;
+    color: #fff;
+}
+
 @media (max-width: 575px)
 .breadcrumb-area-2 {
     padding-top: 10px;

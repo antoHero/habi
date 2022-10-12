@@ -16,6 +16,8 @@
 <script src="{{ url('frontend_assets') }}/assets/js/jquery.nice-select.min.js"></script>
 <script src="{{ url('frontend_assets') }}/assets/js/main.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <!-- @notifyJs -->
 
 <script>
@@ -26,7 +28,7 @@
         })
     }
 
-    var base_url = "{{ url('/') }}"
+    let base_url = "{{ url('/') }}"
 
     $('.openSelectStyleModal').on('click', function(e) {
         e.preventDefault();
@@ -187,6 +189,59 @@
         console.log('clicked radio btn')
     }
 
+
+    function deleteUserAddress(id) {
+        let deleteUrl = base_url + '/' + 'address/delete/' + id
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
+            },
+            buttonsStyling: false
+            })
+
+            swalWithBootstrapButtons.fire({
+            title: 'Are you sure you want to delete this address?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, cancel!',
+            reverseButtons: true
+            }).then((result) => {
+            if (result.isConfirmed) {
+                $.get(deleteUrl, function(response) {
+                    const { success, message } = response
+                    if(success == true) {
+                        swalWithBootstrapButtons.fire(
+                            'Deleted!',
+                            message,
+                            'success'
+                        )
+
+                        $('.swal2-confirm').on('click', function() {
+                            window.location.reload()
+                        })
+                    } else {
+                        swalWithBootstrapButtons.fire(
+                            'Error!',
+                            message,
+                            'error'
+                        )
+                    }
+                })
+            } else if (
+                /* Read more about handling dismissals below */
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+                swalWithBootstrapButtons.fire(
+                'Cancelled',
+                'Your address is safe :)',
+                'error'
+                )
+            }
+        })
+    }
 
     
     // $(document).ready(function() {

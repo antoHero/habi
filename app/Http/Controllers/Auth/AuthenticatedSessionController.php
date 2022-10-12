@@ -32,6 +32,10 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        //check type of user
+        if(auth()->user()->profile->type == 'user') {
+            return redirect()->route('get.home');
+        }
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 

@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\FabricController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\StyleController;
+use App\Http\Controllers\Frontend\AccountController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
@@ -27,6 +28,20 @@ use App\Http\Controllers\Frontend\SpecialOrderController;
 Route::get('/action-success', function() {
   return view('pages.frontend.success.success');
 })->name('action.success');
+
+Route::controller(AccountController::class)->group(function() {
+  Route::prefix('my-account')->middleware('auth')->group(function() {
+    Route::get('/', 'index')->name('user.index');
+    Route::get('/order-history', 'orderHistory')->name('user.order.history');
+    Route::get('/order-details/{order:reference}', 'orderDetails')->name('user.order.details');
+    Route::get('/delivery-address', 'address')->name('user.delivery.address');
+    Route::get('/new-address', 'newAddress')->name('user.new.address');
+    Route::post('/new-address', 'store')->name('user.store.address');
+    Route::get('/address/{address:id}', 'view')->name('user.get.address');
+    Route::get('/delete-address/{address:id}', 'delete')->name('user.delete.address');
+    Route::get('/settings', 'settings')->name('user.settings');
+  });
+});
 
 Route::get('measurement/styles/{category:id}', [FrontendController::class, 'styles']);
 Route::controller(FrontendController::class)->group(function() {

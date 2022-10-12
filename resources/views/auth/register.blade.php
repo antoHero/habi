@@ -33,6 +33,15 @@ Create a new account
           <div class="col-lg-8 offset-lg-2">
                 <div class="basic-login">
                    <h3 class="text-center mb-60">{{ __('Create a new account') }}</h3>
+                   @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                    <form method="POST" action="{{ route('register') }}">
                     @csrf
                         <label for="name">{{ __('Name') }} <span>*</span></label>

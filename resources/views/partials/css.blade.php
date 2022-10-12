@@ -216,7 +216,7 @@ svg:not(:root) {
 
 #deleteAddressBtn {
     background-color: #f57e60;
-;
+    cursor: pointer;
     color: #fff;
 }
 

@@ -33,7 +33,7 @@ My order history
                     <div class="postbox__details">
                         <div class="postbox__details-content">
                             <a href="#" class="tag-btn postbox__tag postbox__tag-2">My Addresses</a>
-                            <a href="{{ route('user.new.address') }}" class="tag-btn postbox__tag postbox__tag-2">Add New</a>
+                            @if(count($addresses)) <a href="{{ route('user.new.address') }}" class="tag-btn postbox__tag postbox__tag-2">Add New</a> @endif
                             
                             @if(count($addresses))
                             <div class="row">
@@ -50,7 +50,7 @@ My order history
                                             <div class="about__me-social">
                                                 <ul>
                                                     <li class="pb-10"><a href="{{ route('user.get.address', $address->id) }}" class="contact__form-btn mt-15" id="editAddressBtn">Edit</a></li>
-                                                    <li><a href="{{ route('user.delete.address', $address->id) }}" class="mt-15" id="deleteAddressBtn">Delete</a></li>
+                                                    <li><a class="mt-15 deleteAddressBtn-{{$address->id}}" id="deleteAddressBtn" data-id="{{ $address->id }}" onclick="deleteUserAddress({{ $address->id }})">Delete</a></li>
                                                 </ul>
                                             </div>
                                         </div>

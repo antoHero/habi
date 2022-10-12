@@ -39,12 +39,12 @@ class AddressController extends Controller
     
             if($data['default'] == 'Yes') {
                 //get user addresses
-                $address = $user->addresses()->where('is_default', 'Yes')->first();
-
-                //set default to No
-
-                $address->is_default = 'No';
-                $address->save();
+                if($address = $user->addresses()->where('is_default', 'Yes')->first())
+                {
+                    //set default to No
+                    $address->is_default = 'No';
+                    $address->save();
+                }
             }
 
             //store new address
@@ -116,5 +116,24 @@ class AddressController extends Controller
 
             return redirect()->route('user.delivery.address');
         });
+    }
+
+    public function delete(Address $address)
+    {
+        return DB::transaction(function() use($address) {
+            
+            if($address->delete())
+            {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Address successfully deleted'
+                ]);
+            }
+            return response()->json([
+                'success' => false,
+                'message' => 'An error occurred, please try again'
+            ]);
+        });
+        
     }
 }

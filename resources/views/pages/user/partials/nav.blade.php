@@ -11,7 +11,7 @@
                     <li id="{{ Request::RouteIs('user.order.history') ? 'active-link' : '' }}">
                         <a href="{{ route('user.order.history') }}">My Order History</a>
                     </li>
-                    <li id="{{ Request::RouteIs('user.delivery.address') || Request::RouteIs('user.new.address') ? 'active-link' : '' }}">
+                    <li id="{{ Request::RouteIs('user.delivery.address') || Request::RouteIs('user.new.address') || Request::RouteIs('user.get.address') ? 'active-link' : '' }}">
                         <a href="{{ route('user.delivery.address') }}">Address book</a>
                     </li>
 

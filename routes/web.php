@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\SubcategoryController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\FabricController;
 use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\StyleController;
 use App\Http\Controllers\Frontend\AccountController;
 use App\Http\Controllers\Frontend\AccountSettingsController;
@@ -186,6 +187,17 @@ Route::prefix('dashboard')->group(function() {
         Route::get('/style/{style:slug}', 'style')->name('style.style');
         Route::put('/style/{style:slug}', 'updateStyle')->name('style.update');
         Route::get('style/delete/{style:slug}', 'delete')->name('style.delete');
+      });
+    });
+
+    Route::prefix('orders')->group(function() {
+      Route::controller(OrderController::class)->group(function() {
+        Route::get('/', 'index')->name('orders.index');
+        Route::get('/pending', 'pending')->name('orders.pending');
+        Route::get('/in-progress', 'progress')->name('orders.progress');
+        Route::get('/cancelled', 'cancelled')->name('orders.cancelled');
+        Route::get('/delivered', 'completed')->name('orders.delivered');
+        Route::get('/details/{order:reference}', 'details')->name('orders.order.details');
       });
     });
 
